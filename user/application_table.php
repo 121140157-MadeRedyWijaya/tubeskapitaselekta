@@ -8,11 +8,14 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Mengambil data dari database
-$query = "SELECT * FROM warga_pengajuan WHERE username = ?";
+
+$query = "SELECT * FROM warga_pengajuan WHERE username = ? ORDER BY tanggal_submit DESC";
 $stmt = mysqli_prepare($koneksi, $query);
 mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
+
+
 
 ?>
 
@@ -26,30 +29,68 @@ $result = mysqli_stmt_get_result($stmt);
             background-color: #f4f4f4;
         }
 
-        .sidebar {
-            background-color: #ff77a9;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            padding: 20px;
-        }
-
-        .menu-item a {
-            display: block;
+        /* Header */
+        header {
+            width: 100%;
+            height: 100px;
             color: #fff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding:0 10px 0 10px;
+        
+        }
+
+        header h2{
+            color: #333;
+            margin: 0;
+        }
+
+        a {
             text-decoration: none;
-            margin-bottom: 10px;
+            color: #333;
         }
 
-        .menu-item a:hover {
-            text-decoration: underline;
+        .nav-link {
+            color: #333;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 5px; 
         }
 
+        .nav-link:hover {
+            color: #CB0CB8;
+        }
+
+        .nav-link-left {
+            float: left;
+        }
+
+        .nav-link-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link-right a {
+            margin-left: 20px; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 50px;
+            margin-right: 10px;
+        }
+
+        /* konten */
         .content {
-            margin-left: 280px;
-            padding: 20px;
+            padding: 50px;
         }
 
         h2 {
@@ -79,9 +120,7 @@ $result = mysqli_stmt_get_result($stmt);
             background-color: #f2f2f2;
         }
 
-        tr:hover {
-            background-color: #ddd;
-        }
+
         .logout-link {
             position: absolute;
             bottom: 20px;
@@ -105,41 +144,81 @@ $result = mysqli_stmt_get_result($stmt);
             background-color: #66cc66; /* Hijau */
         }
 
+        .detail-link {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .detail-link:hover {
+            background-color: #2980b9;
+        }
+
+         /* Tambahkan style untuk tombol batal */
+        /* Tambahkan style untuk tombol detail dan batal */
+   
+
+        .detail-link,
+        .batal-link {
+            flex: 1;
+            margin-right: 5px;
+            max-width: 50px; 
+        }
+
+        .batal-link {
+            background-color: #e74c3c; /* Merah */
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
+        .batal-link:hover {
+            background-color: #c0392b; /* Merah tua saat dihover */
+        }
+
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="menu-item">
-            <a href="./user_dashboard.php">Dashboard Pengguna</a>
+
+    <header>
+        <div class="logo">
+            <img src="../logo.png" alt="Logo">
+            <h2>Pendataan Desa Kali Sari</h2>
         </div>
-        <div class="menu-item">
-            <a href="./data_form.php">Formulir Permohonan Pendataan</a>
+
+        <div class="nav-link-right">
+            <a href="user_dashboard.php" class="nav-link nav-link-right">Dashboard</a>
+            <a href="data_form.php" class="nav-link nav-link-right">Formulir</a>
+            <a href="application_table.php" class="nav-link nav-link-right">Pengajuan</a>
+            <a><?php echo $_SESSION['username']; ?></a>
+            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
         </div>
-        <div class="menu-item">
-            <a href="./application_table.php">Tabel Permohonan</a>
-        </div>
-        <a class="logout-link" href="../logout.php">Logout</a>
-    </div>
+    </header>
 
 
 
     <div class="content">
         <h2>Tabel Data Pengajuan</h2>
-
         <?php
         if (mysqli_num_rows($result) > 0) {
             // Tampilkan tabel jika ada data
             ?>
             <table>
                 <tr>
-                    <th>Waktu pengajuan</th>
                     <th>NIK</th>
                     <th>Tanggal Lahir</th>
                     <th>Nama</th>
-                    <th>Agama</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Alamat</th>
-                    <th>Status</th> <!-- Kolom status ditambahkan -->
+                    <th>Detail</th>
+                    <th>Status</th>
                 </tr>
                 <?php
                 while ($row = mysqli_fetch_assoc($result)) {
@@ -147,13 +226,18 @@ $result = mysqli_stmt_get_result($stmt);
                     $statusClass = $row['diproses'] == 1 ? 'status-sudah-diproses' : 'status-sedang-diproses';
 
                     echo "<tr>";
-                    echo "<td>" . $row['tanggal_submit'] . "</td>";
                     echo "<td>" . $row['nik'] . "</td>";
                     echo "<td>" . $row['tanggal_lahir'] . "</td>";
                     echo "<td>" . $row['nama'] . "</td>";
-                    echo "<td>" . $row['agama'] . "</td>";
-                    echo "<td>" . $row['jenis_kelamin'] . "</td>";
-                    echo "<td>" . $row['alamat'] . "</td>";
+                    echo "<td class='detail-batal-container'>";
+                    echo "<a class='detail-link' href='detail_pengajuan.php?id={$row['id']}'>Detail</a>";
+                    // Tambahkan tombol batal dengan konfirmasi JavaScript
+                    // Tambahkan kondisi untuk menampilkan tombol batal hanya jika status belum diproses
+                    if ($row['diproses'] == 0) {
+                        echo "<a class='batal-link' href='javascript:void(0);' onclick='konfirmasiBatal({$row['id']})'>Batalkan</a>";
+                    }
+                    
+                    echo "</td>";
                     echo "<td class='{$statusClass}'>" . ($row['diproses'] == 1 ? 'Sudah diproses' : 'Sedang diproses') . "</td>";
                     echo "</tr>";
                 }
@@ -166,6 +250,16 @@ $result = mysqli_stmt_get_result($stmt);
         }
         ?>
     </div>
+
+    <!-- Tambahkan script JavaScript untuk konfirmasi batal -->
+    <script>
+        function konfirmasiBatal(id) {
+            var konfirmasi = confirm("Apakah Anda yakin ingin membatalkan pengajuan?");
+            if (konfirmasi) {
+                window.location.href = 'batal_pengajuan.php?id=' + id;
+            }
+        }
+    </script>
 
 </body>
 </html>
