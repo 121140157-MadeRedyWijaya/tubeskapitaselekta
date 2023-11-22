@@ -53,36 +53,86 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         body {
             font-family: Arial, sans-serif;
             background-color: #fff5f5;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            height: 100px;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding:0 10px 0 10px;
+        
+        }
+
+        header h2{
+            color: #333;
             margin: 0;
-            padding: 0;
         }
 
-        .sidebar {
-            background-color: #ff77a9;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            padding: 20px;
+        a {
+            text-decoration: none;
+            color: #333;
         }
 
-        .menu-item a {
-            display: block;
+        .nav-link {
+            color: #333;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 5px; 
+        }
+
+        .nav-link:hover {
+            color: #CB0CB8;
+        }
+
+        .nav-link-left {
+            float: left;
+        }
+
+        .nav-link-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link-right a {
+            margin-left: 20px; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 50px;
+            margin-right: 10px;
+        }
+        .logout-link {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
             color: #fff;
             text-decoration: none;
-            margin-bottom: 10px;
         }
 
-        .menu-item a:hover {
+        .logout-link:hover {
             text-decoration: underline;
         }
 
+        /* konten */
         .content {
-            margin-left: 280px;
-            padding: 20px;
-            margin-top: 50px;
+            padding: 50px;
             text-align: center;
+            background-color: #fff; /* Set background color */
+            border-radius: 10px; /* Add some border-radius for a rounded appearance */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+            margin-top: 20px; /* Provide some space from the header */
         }
 
         h2 {
@@ -103,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ddd;
-            width: 100%;
+            width: 50%;
         }
 
         input[type="submit"] {
@@ -113,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: #e86bd9;
             color: white;
             cursor: pointer;
-            width: 100%;
+            width: 8%;
         }
 
         input[type="submit"]:hover {
@@ -123,36 +173,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         p {
             margin-top: 20px;
         }
-        .logout-link {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .logout-link:hover {
-            text-decoration: underline;
-        }
+        
 
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="menu-item">
-            <a href="./user_dashboard.php">Dashboard Pengguna</a>
+    <header>
+        <div class="logo">
+            <img src="../logo.png" alt="Logo">
+            <h2>Pendataan Desa Kali Sari</h2>
         </div>
-        <div class="menu-item">
-            <a href="./data_form.php">Formulir Permohonan Pendataan</a>
+
+        <div class="nav-link-right">
+            <a href="user_dashboard.php" class="nav-link nav-link-right">Dashboard</a>
+            <a href="data_form.php" class="nav-link nav-link-right">Formulir</a>
+            <a href="application_table.php" class="nav-link nav-link-right">Pengajuan</a>
+            <a>Warga <?php echo $_SESSION['username']; ?></a>
+            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
         </div>
-        <div class="menu-item">
-            <a href="./application_table.php">Tabel Permohonan</a>
-        </div>
-        <a class="logout-link" href="../logout.php">Logout</a>
-    </div>
+    </header>
+
+
     <div class="content">
         <h2>Welcome, User <?php echo $_SESSION['username']; ?></h2>
-        <!-- Tambahkan konten sesuai kebutuhan -->
+        
         <p>This is the user dashboard.</p>
 
         <h2>Cek Data di Database</h2>
