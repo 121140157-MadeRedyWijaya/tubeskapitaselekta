@@ -184,10 +184,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         input[type="date"],
         input[type="file"],
         input[type="hidden"] {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
+            /* padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ddd;*/
             width: 100%;
+            width: 367.514px; 
+        height: 34.229px;
+        flex-shrink: 0;
+        border-radius: 9.908px;
+        border: 0.225px solid #000;
+        background: #EDF2F7;
         }
 
         input[type="submit"] {
@@ -197,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #e86bd9;
             color: white;
             cursor: pointer;
-            width: 100%;
+            width: 10%;
         }
 
         input[type="submit"]:hover {
