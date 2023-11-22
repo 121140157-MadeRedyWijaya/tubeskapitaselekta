@@ -6,6 +6,12 @@
     <title>Desa Kali Sari</title>
     <style>
         body {
+      
+            background-image: url('background3.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            
             font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -14,7 +20,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+ 
+            min-height: 100vh; 
+            position: relative; 
         }
 
         #logo {
@@ -52,6 +60,21 @@
             max-width: 10%;
             height: auto;
         }
+        /* Style untuk footer */
+        footer {
+            background-color: #5E5E5E; /* Warna abu-abu */
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            position: fixed; /* Tambahkan position fixed */
+            bottom: 0; /* Posisikan di bagian bawah */
+        }
+
+        footer a {
+            text-decoration: none;
+            color: #FFF;
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
@@ -61,5 +84,11 @@
         <a href="login.php">Login</a>
         <a href="register.php">Daftar Akun</a>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <a href="https://kalisarinatar.id/">Tentang Desa</a>
+        <a href="#">Butuh Bantuan</a>
+    </footer>
 </body>
 </html>
