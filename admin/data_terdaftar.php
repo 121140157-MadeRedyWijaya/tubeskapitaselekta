@@ -1,5 +1,11 @@
 <?php
 include __DIR__ . '/../koneksi.php';
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
 
 // Query untuk mengambil data dari database
 $query = "SELECT * FROM warga_terdaftar";
@@ -19,34 +25,70 @@ $num_rows = mysqli_num_rows($result);
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
         }
 
-        .sidebar {
-            background-color: #ff77a9;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            padding: 20px;
-        }
-
-        .menu-item a {
-            display: block;
+        /* Header */
+        header {
+            width: 100%;
+            height: 100px;
             color: #fff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding:0 10px 0 10px;
+        
+        }
+
+        header h2{
+            color: #333;
+            margin: 0;
+        }
+
+        a {
             text-decoration: none;
-            margin-bottom: 10px;
+            color: #333;
         }
 
-        .menu-item a:hover {
-            text-decoration: underline;
+        .nav-link {
+            color: #333;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 5px; 
         }
 
+        .nav-link:hover {
+            color: #CB0CB8;
+        }
+
+        .nav-link-left {
+            float: left;
+        }
+
+        .nav-link-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link-right a {
+            margin-left: 20px; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 50px;
+            margin-right: 10px;
+        }
+        
+        /* konten */
         .content {
-            margin-left: 280px;
-            padding: 20px;
+            padding: 50px;
         }
 
         h2 {
@@ -57,29 +99,57 @@ $num_rows = mysqli_num_rows($result);
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
+            border: 2px solid #e86bd9;
         }
 
         th, td {
-            padding: 10px;
+            padding: 12px;
             text-align: left;
+            border-bottom: 1px solid #ddd;
+            border-right: 1px solid #ddd;
         }
 
         th {
+            text-align: center;
             background-color: #e86bd9;
             color: white;
         }
 
-        .search-label {
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .button-lihat {
+            width: 70px;
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .button-lihat:hover {
+            background-color: #45a049;
+        }
+
+        /* Style for search input */
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        #search {
+            padding: 8px;
             margin-bottom: 10px;
         }
 
+        /* Style for data info */
         .count-info {
             margin-top: 10px;
+            font-weight: bold;
         }
+
 
         /* Tambahkan style untuk link logout */
         .logout-link {
@@ -93,28 +163,48 @@ $num_rows = mysqli_num_rows($result);
         .logout-link:hover {
             text-decoration: underline;
         }
+        /* detail */
+        .detail {
+            text-align: center;
+        }
+        /* detail buttons */
+        /* Tambahkan style untuk tombol detail */
+        /* Tambahkan style untuk tombol detail Periksa */
+        .button-lihat {
+            width: 70px;
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .button-lihat:hover {
+            background-color: #45a049;
+        }
+        
+
+
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="menu-item">
-            <a href="./admin_dashboard.php">Dashboard Admin</a>
-        </div>
-        <div class="menu-item">
-            <a href="./data_pengajuan.php">Cek Data Pengajuan</a>
-        </div>
-        <div class="menu-item">
-            <a href="./data_terdaftar.php">Cek Data Warga</a>
-        </div>
-        <div class="menu-item">
-            <a href="./data_user.php">Cek Data User</a>
+    <header>
+        <div class="logo">
+            <img src="../logo.png" alt="Logo">
+            <h2>Pendataan Desa Kali Sari</h2>
         </div>
 
-        <!-- Letakkan link logout di bagian bawah sidebar -->
-        <a class="logout-link" href="../logout.php">Logout</a>
-
-    </div>
+        <div class="nav-link-right">
+            <a href="admin_dashboard.php" class="nav-link nav-link-right">Dashboard</a>
+            <a href="data_pengajuan.php" class="nav-link nav-link-right">Pengajuan</a>
+            <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
+            <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
+            <a>Admin <?php echo $_SESSION['username']; ?></a>
+            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
+        </div>
+    </header>
 
     <div class="content">
         <h2>Data Warga Terdaftar</h2>
@@ -130,10 +220,10 @@ $num_rows = mysqli_num_rows($result);
         <table id="wargaTable">
             <thead>
                 <tr>
-                    <th>NIK</th>
-                    <th>Nama</th>
-                    <th>Tanggal Lahir</th>
-                    <th>Action</th>
+                    <th style="width: 20%;">NIK</th>
+                    <th style="width: 15%;">Tanggal Lahir</th>
+                    <th style="width: 30%;">Nama</th>
+                    <th style="width: 10%;">Detail</th>
                 </tr>
             </thead>
             <tbody>
@@ -142,9 +232,14 @@ $num_rows = mysqli_num_rows($result);
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<tr>";
                     echo "<td>{$row['nik']}</td>";
-                    echo "<td>{$row['nama']}</td>";
                     echo "<td>{$row['tanggal_lahir']}</td>";
-                    echo "<td><a href='detail_warga.php?nik={$row['nik']}'>Detail</a></td>";
+                    echo "<td>{$row['nama']}</td>";
+                    echo "<td class='detail'>
+                            <form action='detail_warga.php' method='get'>
+                                <input type='hidden' name='nik' value='{$row['nik']}'>
+                                <button class='button-lihat' type='submit'>Lihat</button>
+                            </form>
+                          </td>";
                     echo "</tr>";
                 }
                 ?>
@@ -164,7 +259,7 @@ $num_rows = mysqli_num_rows($result);
 
             // Loop melalui semua baris dan sembunyikan yang tidak sesuai
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1]; // Ganti angka 1 dengan indeks kolom yang ingin Anda cari
+                td = tr[i].getElementsByTagName("td")[2]; // Ganti angka 1 dengan indeks kolom yang ingin Anda cari
                 if (td) {
                     txtValue = td.textContent || td.innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {

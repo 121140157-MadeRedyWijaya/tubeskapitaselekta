@@ -32,34 +32,69 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
         }
 
-        .sidebar {
-            background-color: #ff77a9;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            padding: 20px;
-        }
-
-        .menu-item a {
-            display: block;
+        /* Header */
+        header {
+            width: 100%;
+            height: 100px;
             color: #fff;
-            text-decoration: none;
-            margin-bottom: 10px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding:0 10px 0 10px;
+        
         }
 
-        .menu-item a:hover {
-            text-decoration: underline;
+        header h2{
+            color: #333;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .nav-link {
+            color: #333;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 5px; 
+        }
+
+        .nav-link:hover {
+            color: #CB0CB8;
+        }
+
+        .nav-link-left {
+            float: left;
+        }
+
+        .nav-link-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link-right a {
+            margin-left: 20px; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 50px;
+            margin-right: 10px;
         }
 
         .content {
-            margin-left: 280px;
-            padding: 20px;
+            padding: 50px;
         }
 
         table {
@@ -68,6 +103,8 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
             margin-top: 20px;
         }
 
+       
+
         th, td {
             padding: 12px;
             text-align: left;
@@ -75,8 +112,11 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
         }
 
         th {
-            background-color: #f2f2f2;
+            text-align: center;
+            background-color: #B3B3B3;
         }
+
+
 
         h2 {
             margin-bottom: 20px;
@@ -93,27 +133,63 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
         .logout-link:hover {
             text-decoration: underline;
         }
+
+        /* detail */
+        .detail {
+            text-align: center;
+        }
+        /* detail buttons */
+        /* Tambahkan style untuk tombol detail */
+        /* Tambahkan style untuk tombol detail Periksa */
+        .button-periksa {
+            width: 70px;
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .button-periksa:hover {
+            background-color: #45a049;
+        }
+        
+        /* Tambahkan style untuk tombol detail Lihat */
+        .button-lihat {
+            width: 70px;
+            padding: 8px 12px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .button-lihat:hover {
+            background-color: #2980b9;
+        }
+        
+
+
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="menu-item">
-            <a href="./admin_dashboard.php">Dashboard Admin</a>
-        </div>
-        <div class="menu-item">
-            <a href="./data_pengajuan.php">Cek Data Pengajuan</a>
-        </div>
-        <div class="menu-item">
-            <a href="./data_terdaftar.php">Cek Data Warga</a>
-        </div>
-        <div class="menu-item">
-            <a href="./data_user.php">Cek Data User</a>
+    <header>
+        <div class="logo">
+            <img src="../logo.png" alt="Logo">
+            <h2>Pendataan Desa Kali Sari</h2>
         </div>
 
-        <!-- Letakkan link logout di bagian bawah sidebar -->
-        <a class="logout-link" href="../logout.php">Logout</a>
-
-    </div>
+        <div class="nav-link-right">
+            <a href="admin_dashboard.php" class="nav-link nav-link-right">Dashboard</a>
+            <a href="data_pengajuan.php" class="nav-link nav-link-right">Pengajuan</a>
+            <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
+            <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
+            <a>Admin <?php echo $_SESSION['username']; ?></a>
+            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
+        </div>
+    </header>
 
     <div class="content">
         <h2>Data Belum Diproses</h2>
@@ -121,11 +197,11 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
         <p>Jumlah Data Belum Diproses: <?php echo $numRowsBelumDiproses; ?></p>
         <table border='1'>
             <tr>
-                <th>Tanggal Pengajuan</th>
-                <th>NIK</th>
-                <th>Tanggal Lahir</th>
-                <th>Nama</th>
-                <th>Action</th>
+                <th style="width: 15%;">Tanggal Pengajuan</th>
+                <th style="width: 20%;">NIK</th>
+                <th style="width: 15%;">Tanggal Lahir</th>
+                <th style="width: 30%;">Nama</th>
+                <th style="width: 10%;">Detail</th>
             </tr>
 
             <?php
@@ -135,22 +211,23 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
                 echo "<td>" . $row['nik'] . "</td>";
                 echo "<td>" . $row['tanggal_lahir'] . "</td>";
                 echo "<td>" . $row['nama'] . "</td>";
-                echo "<td><a href='detail.php?nik=" . $row['nik'] . "'>Detail</a></td>";
+                echo "<td class='detail'><form action='detail.php' method='get'><input type='hidden' name='nik' value='" . $row['nik'] . "'><button class='button-periksa' type='submit'>Periksa</button></form></td>";
                 echo "</tr>";
             }
             ?>
         </table>
+        <br><br>
 
         <h2>Data Sudah Diproses</h2>
         <!-- Menampilkan informasi jumlah data sudah diproses -->
         <p>Jumlah Data Sudah Diproses: <?php echo $numRowsSudahDiproses; ?></p>
         <table border='1'>
             <tr>
-                <th>Tanggal Pengajuan</th>
-                <th>NIK</th>
-                <th>Tanggal Lahir</th>
-                <th>Nama</th>
-                <th>Action</th>
+            <th style="width: 15%;">Tanggal Pengajuan</th>
+                <th style="width: 20%;">NIK</th>
+                <th style="width: 15%;">Tanggal Lahir</th>
+                <th style="width: 30%;">Nama</th>
+                <th style="width: 10%;">Detail</th>
             </tr>
 
             <?php
@@ -160,7 +237,7 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
                 echo "<td>" . $row['nik'] . "</td>";
                 echo "<td>" . $row['tanggal_lahir'] . "</td>";
                 echo "<td>" . $row['nama'] . "</td>";
-                echo "<td><a href='detail_diterima.php?nik=" . $row['nik'] . "'>Detail</a></td>";
+                echo "<td class='detail'><form action='detail_diterima.php' method='get'><input type='hidden' name='nik' value='" . $row['nik'] . "'><button class='button-lihat' type='submit'>Lihat</button></form></td>";
                 echo "</tr>";
             }
             ?>

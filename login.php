@@ -59,73 +59,128 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
             background-position: center;
         }
 
-        .content {
-            width: 300px;
-            margin: 0 auto;
-            margin-top: 100px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            text-align: center;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        input[type="submit"] {
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #e86bd9;
-            color: white;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #e332ce;
-        }
-
-        p {
-            text-align: center;
-            margin-top: 10px;
+        header {
+        width: 100%;
+        height: 50px;
+        color: #fff;
+        text-align: center;
         }
 
         a {
-            color: #0645AD;
-            text-decoration: none;
+        text-decoration: none;
+        color:#2F2F2F;
+        }
+
+        .nav-link {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 18px;
+        font-weight: bold;
+        color:#2F2F2F;
+        }
+
+        .nav-link:hover {
+        color: #DB6DD0;
+        }
+
+        .nav-link-left {
+        float: left;
+        }
+
+        .nav-link-right {
+        float: right;
+        }
+
+        h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-align: center;
+        color:#2F2F2F;
+        }
+
+        .form-container {
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        border-radius: 5px;
+        }
+
+        .form-group {
+        margin-bottom: 10px;
+        align-items: center;
+        color:#2F2F2F;
+        }
+
+        .form-control {
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #E6E6E6;
+        }
+
+        label {
+        font-weight: bold;
+        }
+
+        input {
+        width: 93%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        }
+
+        input[type="text"] {
+        height: 30px;
+        }
+
+        input[type="email"] {
+        height: 30px;
+        }
+
+        input[type="password"] {
+        height: 30px;
+        }
+
+
+        button {
+            width: 20%; 
+            background-color:#DB6DD0;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            display: block; 
+            margin: 20px auto; 
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+
+        button:hover {
+        background-color: #CB0CB8;
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h2>Form Login</h2>
-        <form method="post" action="">
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username"><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password"><br>
-            <input type="submit" value="Login">
-        </form>
-        <p>Belum punya akun? <a href="register.php">Daftar di sini</a></p>
+    
+   
+    <header>
+    <a href="index.php" class="nav-link nav-link-left"> < Kembali ke Halaman Utama</a>
+    <a href="register.php" class="nav-link nav-link-right">Daftar</a>
+    </header>
 
+    <h1>Login Akun</h1>
+    <div class="form-container">
+        <form method="post" action="">
+            <div class="form-group">
+                <label for="id">ID/Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan ID/Username" required>
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary" value="Login">Login</button>
+        </form>
     </div>
+
+    
 </body>
 </html>

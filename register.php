@@ -1,8 +1,7 @@
 <?php
 include 'koneksi.php';
-// Selanjutnya, baris-baris kode PHP Anda
 ?>
-<!-- Formulir Registrasi -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,70 +14,142 @@ include 'koneksi.php';
             background-position: center;
         }
 
-        .content {
-            width: 300px;
-            margin: 0 auto;
-            margin-top: 50px;
-            padding: 20px;
-            background-color: #fff;
+        header {
+        width: 100%;
+        height: 50px;
+        color: #fff;
+        text-align: center;
+        }
+
+        a {
+        text-decoration: none;
+        color:#2F2F2F;
+        }
+
+        .nav-link {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 18px;
+        font-weight: bold;
+        color:#2F2F2F;
+        }
+
+        .nav-link:hover {
+        color: #DB6DD0;
+        }
+
+        .nav-link-left {
+        float: left;
+        }
+
+        .nav-link-right {
+        float: right;
+        }
+
+        h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-align: center;
+        color:#2F2F2F;
+        }
+
+        .form-container {
+        width: 300px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        border-radius: 5px;
+        }
+
+        .form-group {
+        margin-bottom: 10px;
+        align-items: center;
+        color:#2F2F2F;
+        }
+
+        .form-control {
+            margin-bottom: 10px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            text-align: center;
-        }
-
-        form {
-            width: 280px;
-            display: flex;
-            flex-direction: column;
+            background-color: #E6E6E6;
         }
 
         label {
-            font-weight: bold;
+        font-weight: bold;
         }
 
-        input[type="text"],
+        input {
+        width: 93%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        }
+
+        input[type="text"] {
+        height: 30px;
+        }
+
+        input[type="email"] {
+        height: 30px;
+        }
+
         input[type="password"] {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            width: 100%;
+        height: 30px;
         }
 
-        input[type="submit"] {
+
+        button {
+            width: 20%; 
+            background-color:#DB6DD0;
+            color: #fff;
             padding: 10px;
-            border-radius: 5px;
             border: none;
-            background-color: #e86bd9;
-            color: white;
             cursor: pointer;
-            width: 100%;
+            display: block; 
+            margin: 20px auto; 
+            border-radius: 10px;
+            margin-bottom: 5px;
         }
 
-        input[type="submit"]:hover {
-            background-color: #e332ce;
+        button:hover {
+        background-color: #CB0CB8;
         }
     </style>
 
 </head>
 <body>
-    <div class="content">
-        <h2>Form Registrasi</h2>
-        <form method="post" action="">
-            <label for="username">Username baru:</label><br>
-            <input type="text" id="username" name="username" required><br>
-            <label for="email">Email:</label><br>
-            <input type="text" id="email" name="email" required><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required><br>
-            <input type="submit" value="Register">
-            <p>Kembali ke halaman <a href="login.php">Login</a></p>
-        </form>
 
+    <header>
+    <a href="index.php" class="nav-link nav-link-left"> < Kembali ke Halaman Utama</a>
+    <a href="login.php" class="nav-link nav-link-right">Login</a>
+    </header>
+
+    <h1>Daftar Akun</h1>
+    <div class="form-container">
+        <form  id="registrationForm" method="post" action="">
+            <div class="form-group">
+                <label for="id">ID/Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan ID/Username" required>
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Alamat Email" required>
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="confirmRegistration()">Daftar</button>
+        </form>
     </div>
+
+    <script>
+    function confirmRegistration() {
+        var isConfirmed = confirm("Apakah data tersebut sudah benar?");
+        if (isConfirmed) {
+            // Jika pengguna mengonfirmasi, kirim formulir
+            document.getElementById("registrationForm").submit();
+        } else {
+            // Jika pengguna membatalkan, tidak lakukan apa-apa
+        }
+    }
+    </script>
+
 </body>
 </html>
 

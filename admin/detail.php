@@ -63,14 +63,14 @@ if (isset($_POST['konfirmasi'])) {
 <html>
 <head>
     <title>Detail Data</title>
-    <!-- Styling CSS -->
+    <style>
+        
+    </style>
 </head>
 <body>
     <form method="post" action="detail.php?nik=<?php echo $nik; ?>">
         <input type="submit" name="konfirmasi" value="Terima Data Warga">
     </form>
-    <form method="get" action="data_pengajuan.php">
-        <input type="submit" value="Kembali">
-    </form>
+    <a href="data_pengajuan.php">Kembali</a>
 </body>
 </html>

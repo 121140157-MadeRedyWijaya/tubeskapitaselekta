@@ -4,8 +4,8 @@ include __DIR__ . '/../koneksi.php';
 if (isset($_GET['nik'])) {
     $nik = $_GET['nik'];
 
-    // Query untuk mendapatkan data dari tabel warga_pengajuan_diterima
-    $query = "SELECT * FROM warga_pengajuan WHERE nik = ?";
+    // Query untuk mendapatkan data dari tabel warga_terdaftar
+    $query = "SELECT * FROM warga_terdaftar WHERE nik = ?";
     $stmt = mysqli_prepare($koneksi, $query);
     mysqli_stmt_bind_param($stmt, "s", $nik);
     mysqli_stmt_execute($stmt);
@@ -81,6 +81,8 @@ if (isset($_GET['nik'])) {
     </style>
 </head>
 <body>
-    <a href="data_pengajuan.php">Kembali</a>
+    <form method="get" action="data_terdaftar.php">
+        <input type="submit" value="Kembali">
+    </form>
 </body>
 </html>

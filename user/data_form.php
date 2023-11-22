@@ -93,34 +93,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
         }
 
-        .sidebar {
-            background-color: #ff77a9;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            padding: 20px;
-        }
-
-        .menu-item a {
-            display: block;
+        /* Header */
+        header {
+            width: 100%;
+            height: 100px;
             color: #fff;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px 0 10px;
+
+        }
+
+        header h2{
+            color: #333;
+            margin: 0;
+        }
+
+        a {
             text-decoration: none;
-            margin-bottom: 10px;
+            color: #333;
         }
 
-        .menu-item a:hover {
-            text-decoration: underline;
+        .nav-link {
+            color: #333;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 5px; 
         }
 
+        .nav-link:hover {
+            color: #CB0CB8;
+        }
+
+        .nav-link-left {
+            float: left;
+        }
+
+        .nav-link-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link-right a {
+            margin-left: 20px; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 50px;
+            margin-right: 10px;
+        }
+
+        /* konten  */
         .content {
-            margin-left: 280px;
-            padding: 20px;
+            padding: 50px;
         }
 
         h2 {
@@ -130,18 +166,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         form {
             margin-top: 20px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            flex-wrap: wrap; /* Memungkinkan elemen untuk melibatkan ke baris baru jika tidak cukup ruang */
+        }
+
+        .form-group {
+            flex: 0 0 48%; /* 48% agar ada ruang antar elemen dan tidak melebihi lebar parent */
+            margin-bottom: 15px;
         }
 
         label {
             font-weight: bold;
+            display: block; /* Membuat label menjadi block untuk memastikan label dan input pada baris yang berbeda */
         }
 
         input[type="text"],
         input[type="date"],
         input[type="file"],
         input[type="hidden"] {
-            margin-bottom: 15px;
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ddd;
@@ -179,42 +221,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="menu-item">
-            <a href="./user_dashboard.php">Dashboard Pengguna</a>
+    <header>
+        <div class="logo">
+            <img src="../logo.png" alt="Logo">
+            <h2>Pendataan Desa Kali Sari</h2>
         </div>
-        <div class="menu-item">
-            <a href="./data_form.php">Formulir Permohonan Pendataan</a>
+
+        <div class="nav-link-right">
+            <a href="user_dashboard.php" class="nav-link nav-link-right">Dashboard</a>
+            <a href="data_form.php" class="nav-link nav-link-right">Formulir</a>
+            <a href="application_table.php" class="nav-link nav-link-right">Pengajuan</a>
+            <a><?php echo $_SESSION['username']; ?></a>
+            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
         </div>
-        <div class="menu-item">
-            <a href="./application_table.php">Tabel Permohonan</a>
-        </div>
-        <a class="logout-link" href="../logout.php">Logout</a>
-    </div>
+    </header>
     
     <div class="content">
         <h2>Formulir Pendataan Warga</h2>
         <form method="post" action="" enctype="multipart/form-data" onsubmit="return confirmSubmission()">
-            <!-- Input formulir -->
-            <label for="nik">NIK:</label><br>
-            <input type="text" id="nik" name="nik" required><br><br>
-            <label for="tanggal_lahir">Tanggal Lahir:</label><br>
-            <input type="date" id="tanggal_lahir" name="tanggal_lahir" required><br><br>
-            <label for="nama">Nama:</label><br>
-            <input type="text" id="nama" name="nama" required><br><br>
-            <label for="agama">Agama:</label><br>
-            <input type="text" id="agama" name="agama" required><br><br>
-            <label for="jenis_kelamin">Jenis Kelamin:</label><br>
-            <input type="text" id="jenis_kelamin" name="jenis_kelamin" required><br><br>
-            <label for="alamat">Alamat:</label><br>
-            <input type="text" id="alamat" name="alamat" required><br><br>
+            <!-- Kolom Kiri -->
+            <div class="form-group">
+                <label for="nik">NIK:</label>
+                <input type="text" id="nik" name="nik" required>
 
-            <label for="kk">Unggah file KK sebagai bukti tambahan:</label><br>
-            <input type="file" id="kk" name="kk" accept="image/*" required><br>
-            <label for="ktp">Unggah file KTP sebagai bukti tambahan (Opsional):</label><br>
-            <input type="file" id="ktp" name="ktp" accept="image/*"><br>
+                <label for="tanggal_lahir">Tanggal Lahir:</label>
+                <input type="date" id="tanggal_lahir" name="tanggal_lahir" required>
+
+                <label for="nama">Nama:</label>
+                <input type="text" id="nama" name="nama" required>
+            </div>
+
+            <!-- Kolom Kanan -->
+            <div class="form-group">
+                <label for="agama">Agama:</label>
+                <input type="text" id="agama" name="agama" required>
+
+                <label for="jenis_kelamin">Jenis Kelamin:</label>
+                <input type="text" id="jenis_kelamin" name="jenis_kelamin" required>
+
+                <label for="alamat">Alamat:</label>
+                <input type="text" id="alamat" name="alamat" required>
+            </div>
+
+            <!-- Kolom Tengah -->
+            <div class="form-group">
+                <label for="kk">Unggah file KK sebagai bukti tambahan:</label>
+                <input type="file" id="kk" name="kk" accept="image/*" required>
+            </div>
+
+            <!-- Kolom Tengah -->
+            <div class="form-group">
+                <label for="ktp">Unggah file KTP sebagai bukti tambahan (Opsional):</label>
+                <input type="file" id="ktp" name="ktp" accept="image/*">
+            </div>
+
             <input type="hidden" name="username" value="<?php echo $username; ?>"> <!-- Tambahkan ini untuk menyimpan username -->
-            
+
             <!-- Tombol Submit -->
             <input type="submit" value="Submit">
         </form>

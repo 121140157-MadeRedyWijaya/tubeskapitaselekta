@@ -33,56 +33,76 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
         }
-
-        .sidebar {
-            background-color: #ff77a9;
-            width: 250px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            padding: 20px;
-        }
-
-        .menu-item a {
-            display: block;
+        /* Header */
+        header {
+            width: 100%;
+            height: 100px;
             color: #fff;
-            text-decoration: none;
-            margin-bottom: 10px;
-        }
-
-        .menu-item a:hover {
-            text-decoration: underline;
-        }
-
-        .content {
-            margin-left: 280px;
-            padding: 20px;
-        }
-
-        h2 {
             text-align: center;
-        }
-        /* Tambahkan style untuk link logout */
-        .logout-link {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: #fff;
-            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding:0 10px 0 10px;
+        
         }
 
-        .logout-link:hover {
-            text-decoration: underline;
+        header h2{
+            color: #333;
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .nav-link {
+            color: #333;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 5px; 
+        }
+
+        .nav-link:hover {
+            color: #CB0CB8;
+        }
+
+        .nav-link-left {
+            float: left;
+        }
+
+        .nav-link-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link-right a {
+            margin-left: 20px; 
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 50px;
+            margin-right: 10px;
         }
 
         /* info box */
+        .content{
+            padding: 50px;
+        }
 
         .info-box-container {
             display: flex;
@@ -129,29 +149,36 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
             margin: 0;
         }
 
+
+        
     </style>
+
 </head>
 <body>
-    <div class="sidebar">
-        <div class="menu-item">
-            <a href="./admin_dashboard.php">Dashboard Admin</a>
-        </div>
-        <div class="menu-item">
-            <a href="./data_pengajuan.php">Cek Data Pengajuan</a>
-        </div>
-        <div class="menu-item">
-            <a href="./data_terdaftar.php">Cek Data Warga</a>
-        </div>
-        <div class="menu-item">
-            <a href="./data_user.php">Cek Data User</a>
-        </div>
-
-        <!-- Letakkan link logout di bagian bawah sidebar -->
-        <a class="logout-link" href="../logout.php">Logout</a>
+    <header>
+    <div class="logo">
+        <img src="../logo.png" alt="Logo">
+        <h2>Pendataan Desa Kali Sari</h2>
     </div>
-    <div class="content">
-        <h2>Welcome, Admin <?php echo $_SESSION['username']; ?></h2>
 
+    <div class="nav-link-right">
+        <a href="admin_dashboard.php" class="nav-link nav-link-right">Dashboard</a>
+        <a href="data_pengajuan.php" class="nav-link nav-link-right">Pengajuan</a>
+        <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
+        <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
+        <a>Admin <?php echo $_SESSION['username']; ?></a>
+        <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
+    </div>
+
+  
+    </header>
+
+ 
+    
+    
+
+    <div class="content">
+     
         <!-- Info Box Container -->
         <div class="info-box-container">
             <!-- Info Box 1 -->
@@ -174,6 +201,9 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
         </div>
         
     </div>
+
+
+
 </body>
 </html>
 
