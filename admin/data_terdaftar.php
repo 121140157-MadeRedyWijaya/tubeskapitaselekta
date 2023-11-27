@@ -18,8 +18,7 @@ $num_rows = mysqli_num_rows($result);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Data Warga Terdaftar</title>
     <style>
         body {
@@ -36,11 +35,10 @@ $num_rows = mysqli_num_rows($result);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding:0 10px 0 10px;
-        
+            padding: 0 10px;
         }
 
-        header h2{
+        header h2 {
             color: #333;
             margin: 0;
         }
@@ -96,11 +94,6 @@ $num_rows = mysqli_num_rows($result);
             margin-top: 20px; /* Provide some space from the header */
         }
 
-        header h2{
-            color: #333;
-            margin: 0;
-        }
-
         /* Style for the table */
         table {
             width: 100%;
@@ -141,12 +134,12 @@ $num_rows = mysqli_num_rows($result);
         }
 
         /* Style for search input */
-        label {
+        label.search-label {
             margin-right: 10px;
             font-weight: bold;
         }
 
-        #search {
+        input.search-input {
             padding: 8px;
             margin-bottom: 10px;
         }
@@ -208,7 +201,7 @@ $num_rows = mysqli_num_rows($result);
             <a href="data_pengajuan.php" class="nav-link nav-link-right">Pengajuan</a>
             <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
             <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
-            <a>Admin <?php echo $_SESSION['username']; ?></a>
+            <a style="color: #0012b3; text-decoration: none; font-weight: bold;" href="#">Admin <?php echo $_SESSION['username']; ?></a>
             <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>

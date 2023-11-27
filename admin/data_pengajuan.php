@@ -181,7 +181,7 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
         .button-lihat:hover {
             background-color: #2980b9;
         }
-        
+
 
 
     </style>
@@ -198,7 +198,7 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
             <a href="data_pengajuan.php" class="nav-link nav-link-right">Pengajuan</a>
             <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
             <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
-            <a>Admin <?php echo $_SESSION['username']; ?></a>
+            <a style="color: #0012b3; text-decoration: none; font-weight: bold;" href="#">Admin <?php echo $_SESSION['username']; ?></a>
             <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>

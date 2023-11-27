@@ -130,18 +130,6 @@ $result = mysqli_stmt_get_result($stmt);
         }
 
 
-        .logout-link {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .logout-link:hover {
-            text-decoration: underline;
-        }
-
         /* Tambahkan style untuk status */
         .status-sedang-diproses {
             color: white;
@@ -208,7 +196,7 @@ $result = mysqli_stmt_get_result($stmt);
             <a href="user_dashboard.php" class="nav-link nav-link-right">Dashboard</a>
             <a href="data_form.php" class="nav-link nav-link-right">Formulir</a>
             <a href="application_table.php" class="nav-link nav-link-right">Pengajuan</a>
-            <a><?php echo $_SESSION['username']; ?></a>
+            <a style="color: #0012b3; text-decoration: none; font-weight: bold;" href="#"><?php echo $_SESSION['username']; ?></a>
             <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>

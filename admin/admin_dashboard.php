@@ -155,6 +155,47 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
         }
 
 
+        @media only screen and (max-width: 600px) {
+            header {
+                flex-direction: column; /* Mengubah arah flex ke kolom pada layar kecil */
+                align-items: center;
+            }
+
+            a{
+            }
+            
+            .nav-link-right {
+                margin-top: 10px; /* Menambahkan margin atas pada nav-link-right */
+                font-size:12px;
+            }
+
+            .nav-link-right a {
+                margin-left: 0px; 
+                margin-right: 0px;
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+
+            .nav-link {
+                margin: 5px 0; /* Memberikan margin atas dan bawah pada nav-link */
+            }
+
+            .info-box h3 {
+                font-size: 10px;
+                margin-bottom: 10px;
+            }
+            
+            .info-box p {
+                font-weight: bold;
+                font-size: 50px;
+                margin: 0;
+            }
+            .nav-link-right a:last-child img {
+                width: 25px; /* Sesuaikan dengan ukuran yang diinginkan */
+            }
+        }
+
+
         
     </style>
 
@@ -171,7 +212,7 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
         <a href="data_pengajuan.php" class="nav-link nav-link-right">Pengajuan</a>
         <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
         <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
-        <a>Admin <?php echo $_SESSION['username']; ?></a>
+        <a style="color: #0012b3; text-decoration: none; font-weight: bold;" href="#">Admin <?php echo $_SESSION['username']; ?></a>
         <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
     </div>
 

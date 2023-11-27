@@ -48,6 +48,7 @@ include 'koneksi.php';
         }
 
         h1 {
+            margin-top: 100px;
         font-size: 24px;
         margin-bottom: 10px;
         text-align: center;
@@ -57,7 +58,8 @@ include 'koneksi.php';
         
 
         .form-container {
-            width: 300px;
+            height: 300px;
+            width: 400px;
             margin: 0 auto;
             padding: 20px;
             border: 1px solid #ccc;
@@ -158,6 +160,8 @@ include 'koneksi.php';
 
 <!-- Logika Penyimpanan Data Registrasi -->
 <?php
+include 'koneksi.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $nomorhp = $_POST['nomorhp'] ?? '';
@@ -178,9 +182,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Username sudah digunakan. Silakan pilih username lain.";
     } else {
         // Jika username belum ada, lanjutkan proses registrasi
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
         $query = "INSERT INTO users (username, nomorhp, password, role) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($koneksi, $query);
-        mysqli_stmt_bind_param($stmt, "ssss", $username, $nomorhp, $password, $role);
+        mysqli_stmt_bind_param($stmt, "ssss", $username, $nomorhp, $hashedPassword, $role);
 
         if (mysqli_stmt_execute($stmt)) {
             echo "<script>alert('Pendaftaran Akun Berhasil');</script>";

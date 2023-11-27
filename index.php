@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desa Kali Sari</title>
     <style>
+        /* Common styles for both desktop and mobile */
         body {
-      
             background-image: url('./asset/background.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            
             font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -20,13 +19,12 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
- 
-            min-height: 100vh; 
-            position: relative; 
+            min-height: 100vh;
+            position: relative;
         }
 
         #logo {
-            max-width: 100%;
+            max-width: 10%;
             height: auto;
         }
 
@@ -39,16 +37,19 @@
         .button-container {
             margin-top: 20px;
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
         }
 
         .button-container a {
+            text-align: center;
             text-decoration: none;
             padding: 10px 20px;
             background-color: #3081D0;
             color: white;
             border-radius: 5px;
             font-weight: bold;
+            margin-top: 10px;
             transition: background-color 0.3s;
         }
 
@@ -56,24 +57,40 @@
             background-color: #045676;
         }
 
-        #logo {
-            max-width: 10%;
-            height: auto;
-        }
-        /* Style untuk footer */
+        /* Footer styles for both desktop and mobile */
         footer {
-            background-color: #5E5E5E; /* Warna abu-abu */
+            background-color: #5E5E5E;
             padding: 10px;
             width: 100%;
             text-align: center;
-            position: fixed; /* Tambahkan position fixed */
-            bottom: 0; /* Posisikan di bagian bawah */
+            position: fixed;
+            bottom: 0;
         }
 
         footer a {
             text-decoration: none;
             color: #FFF;
             margin: 0 10px;
+        }
+
+        /* Media query for mobile devices */
+        @media only screen and (max-width: 600px) {
+            #logo {
+                max-width: 30%;
+                height: auto;
+            }
+            h1 {
+                font-size: 20px;
+                text-align: center;
+            }
+
+            .button-container a {
+                width: 80%;
+            }
+
+            body {
+                min-height:60vh;
+            }
         }
     </style>
 </head>

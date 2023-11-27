@@ -113,17 +113,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             max-width: 50px;
             margin-right: 10px;
         }
-        .logout-link {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .logout-link:hover {
-            text-decoration: underline;
-        }
 
         /* konten */
         .content {
@@ -174,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         p {
             margin-top: 20px;
         }
-        
+
 
     </style>
 </head>
@@ -189,7 +178,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="user_dashboard.php" class="nav-link nav-link-right">Dashboard</a>
             <a href="data_form.php" class="nav-link nav-link-right">Formulir</a>
             <a href="application_table.php" class="nav-link nav-link-right">Pengajuan</a>
-            <a><?php echo $_SESSION['username']; ?></a>
+            <a style="color: #0012b3; text-decoration: none; font-weight: bold;" href="#"><?php echo $_SESSION['username']; ?></a>
+
             <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>

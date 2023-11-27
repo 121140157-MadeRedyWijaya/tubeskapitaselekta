@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';  // Memasukkan file koneksi.php
+include 'koneksi.php';
 
 session_start();
 
@@ -18,11 +18,11 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
     $input_password = $_POST['password'] ?? '';
 
     // Gunakan parameterized query untuk mencegah SQL injection
-    $query = "SELECT username, password, role FROM users WHERE username = ? AND password = ?";
+    $query = "SELECT username, password, role FROM users WHERE username = ?";
     $stmt = mysqli_prepare($koneksi, $query);
-    mysqli_stmt_bind_param($stmt, "ss", $input_username, $input_password);
+    mysqli_stmt_bind_param($stmt, "s", $input_username);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $username, $password, $role);
+    mysqli_stmt_bind_result($stmt, $username, $hashed_password, $role);
 
     // Fetch result
     mysqli_stmt_fetch($stmt);
@@ -30,7 +30,7 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
     mysqli_stmt_close($stmt);
 
     // Verifikasi pengguna
-    if ($username && $password) {
+    if ($username && password_verify($input_password, $hashed_password)) {
         // Jika login berhasil, set session dan arahkan ke dashboard sesuai peran
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $role;
@@ -57,107 +57,113 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
             background-color: #f4f4f4;
             background-size: cover;
             background-position: center;
+            margin: 0;
+            min-height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
+
+
         header {
-        width: 100%;
-        height: 50px;
-        color: #fff;
-        text-align: center;
-        margin-bottom : 50px;
+            height: 50px;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         a {
-        text-decoration: none;
-        color:#2F2F2F;
+            text-decoration: none;
+            color: #2F2F2F;
         }
 
         .nav-link {
-        display: inline-block;
-        padding: 10px 20px;
-        font-size: 18px;
-        font-weight: bold;
-        color:#2F2F2F;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2F2F2F;
         }
 
         .nav-link:hover {
-        color: #045676;
+            color: #045676;
         }
 
         .nav-link-left {
-        float: left;
+            float: left;
         }
 
         .nav-link-right {
-        float: right;
+            float: right;
         }
 
         h1 {
-        font-size: 24px;
-        margin-bottom: 10px;
-        text-align: center;
-        color:#2F2F2F;
+            margin-top:100px;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #2F2F2F;
         }
 
         .form-container {
-        width: 300px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        background-color: #fff;
-        border-radius: 5px;
+            height: 230px;
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
+            align-items: center;
         }
 
         .form-group {
-        margin-bottom: 10px;
-        align-items: center;
-        color:#2F2F2F;
+            margin-bottom: 10px;
         }
 
         .form-control {
+            margin-top:10px;
             margin-bottom: 10px;
             border-radius: 5px;
             background-color: #E6E6E6;
         }
 
         label {
-        font-weight: bold;
+            font-weight: bold;
         }
 
         input {
-        width: 93%;
-        padding: 10px;
-        border: 1px solid #ccc;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
-
-        input[type="text"] {
-        height: 30px;
-        }
-
-        input[type="email"] {
-        height: 30px;
-        }
-
-        input[type="password"] {
-        height: 30px;
-        }
-
 
         button {
-            width: 20%; 
-            background-color:#3081D0;
+            width: 100%;
+            background-color: #3081D0;
             color: #fff;
             padding: 10px;
             border: none;
             cursor: pointer;
-            display: block; 
-            margin: 20px auto; 
             border-radius: 10px;
             margin-bottom: 5px;
         }
 
         button:hover {
-        background-color: #045676;
+            background-color: #045676;
+        }
+
+        /* Media queries for mobile devices */
+        @media only screen and (max-width: 600px) {
+            .form-container {
+                width: 90%;
+                padding: 30px;
+            }
+
+            .nav-link {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -169,17 +175,21 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
     <a href="register.php" class="nav-link nav-link-right">Daftar</a>
     </header>
 
-    <h1>Login Akun</h1>
-    <div class="form-container">
-        <form method="post" action="">
-            <div class="form-group">
-                <label for="id">ID/Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan ID/Username" required>
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
-            </div>
-            <button type="submit" class="btn btn-primary" value="Login">Login</button>
-        </form>
+    <div class="content">
+        <h1>Login Akun</h1>
+        <div class="form-container">
+            <form method="post" action="">
+                <div class="form-group">
+                    <label for="id">ID/Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan ID/Username" required>
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" value="Login">Login</button>
+                <p>Belum punya akun? <a href="register.php" style="color: #000DFF;">Daftar</a></p>
+            </form>
+        </div>
+
     </div>
 
     

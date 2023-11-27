@@ -121,12 +121,12 @@ $num_rows = mysqli_num_rows($result);
         }
 
         /* Style for search input */
-        label {
+        label.search-label {
             margin-right: 10px;
             font-weight: bold;
         }
 
-        #search {
+        input.search-input {
             padding: 8px;
             margin-bottom: 10px;
         }
@@ -168,7 +168,7 @@ $num_rows = mysqli_num_rows($result);
             <a href="data_pengajuan.php" class="nav-link nav-link-right">Pengajuan</a>
             <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
             <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
-            <a>Admin <?php echo $_SESSION['username']; ?></a>
+            <a style="color: #0012b3; text-decoration: none; font-weight: bold;" href="#">Admin <?php echo $_SESSION['username']; ?></a>
             <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>
@@ -186,7 +186,6 @@ $num_rows = mysqli_num_rows($result);
             <tr>
                 <th>Username</th>
                 <th>Nomor HP</th>
-                <th>Password</th>
                 <th>Role</th>
             </tr>
             <?php
@@ -195,7 +194,6 @@ $num_rows = mysqli_num_rows($result);
                 echo "<tr>";
                 echo "<td>" . $row['username'] . "</td>";
                 echo "<td>" . $row['nomorhp'] . "</td>";
-                echo "<td>" . $row['password'] . "</td>";
                 echo "<td>" . $row['role'] . "</td>";
                 echo "</tr>";
             }
