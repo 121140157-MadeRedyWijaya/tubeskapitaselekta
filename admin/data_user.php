@@ -60,7 +60,7 @@ $num_rows = mysqli_num_rows($result);
         }
 
         .nav-link:hover {
-            color: #CB0CB8;
+            color: #045676;
         }
 
         .nav-link-left {
@@ -89,6 +89,11 @@ $num_rows = mysqli_num_rows($result);
         /* konten */
         .content {
             padding: 50px;
+            text-align: center;
+            background-color: #fff; /* Set background color */
+            border-radius: 10px; /* Add some border-radius for a rounded appearance */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+            margin-top: 20px; /* Provide some space from the header */
         }
 
         /* Style for the table */
@@ -96,6 +101,7 @@ $num_rows = mysqli_num_rows($result);
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            border: 2px solid #ddd;
         }
 
         th, td {
@@ -105,7 +111,8 @@ $num_rows = mysqli_num_rows($result);
         }
 
         th {
-            background-color: #555;
+            text-align: center;
+            background-color: #3081D0;
             color: white;
         }
 
@@ -152,7 +159,7 @@ $num_rows = mysqli_num_rows($result);
 <body>
     <header>
         <div class="logo">
-            <img src="../logo.png" alt="Logo">
+            <img src="../asset/logo.png" alt="Logo">
             <h2>Pendataan Desa Kali Sari</h2>
         </div>
 
@@ -162,7 +169,7 @@ $num_rows = mysqli_num_rows($result);
             <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
             <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
             <a>Admin <?php echo $_SESSION['username']; ?></a>
-            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
+            <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>
 
@@ -178,7 +185,7 @@ $num_rows = mysqli_num_rows($result);
         <table border='1' id="accountTable">
             <tr>
                 <th>Username</th>
-                <th>Email</th>
+                <th>Nomor HP</th>
                 <th>Password</th>
                 <th>Role</th>
             </tr>
@@ -187,7 +194,7 @@ $num_rows = mysqli_num_rows($result);
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
                 echo "<td>" . $row['username'] . "</td>";
-                echo "<td>" . $row['email'] . "</td>";
+                echo "<td>" . $row['nomorhp'] . "</td>";
                 echo "<td>" . $row['password'] . "</td>";
                 echo "<td>" . $row['role'] . "</td>";
                 echo "</tr>";
@@ -206,7 +213,7 @@ $num_rows = mysqli_num_rows($result);
             filter = input.value.toUpperCase();
             table = document.getElementById("accountTable");
             tr = table.getElementsByTagName("tr");
-
+            
             // Loop melalui semua baris dan sembunyikan yang tidak sesuai
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[1]; // Ganti angka 1 dengan indeks kolom yang ingin Anda cari
@@ -220,8 +227,19 @@ $num_rows = mysqli_num_rows($result);
                 }
             }
         }
+
+        function confirmLogout() {
+                var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
+                if (confirmLogout) {
+                    window.location.href = "../logout.php";
+                }
+        }
     </script>
 
 </body>
-
 </html>
+
+<?php
+// Tutup koneksi database
+mysqli_close($koneksi);
+?>

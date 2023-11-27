@@ -7,7 +7,7 @@
     <style>
         body {
       
-            background-image: url('background3.png');
+            background-image: url('./asset/background.png');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -45,7 +45,7 @@
         .button-container a {
             text-decoration: none;
             padding: 10px 20px;
-            background-color: #e86bd9;
+            background-color: #3081D0;
             color: white;
             border-radius: 5px;
             font-weight: bold;
@@ -53,7 +53,7 @@
         }
 
         .button-container a:hover {
-            background-color: #e332ce;
+            background-color: #045676;
         }
 
         #logo {
@@ -78,7 +78,7 @@
     </style>
 </head>
 <body>
-    <img id="logo" src="logo.png" alt="Desa Kali Sari Logo">
+    <img id="logo" src="./asset/logo.png" alt="Desa Kali Sari Logo">
     <h1>Pendataan Warga Desa Kali Sari</h1>
     <div class="button-container">
         <a href="login.php">Login</a>

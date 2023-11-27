@@ -64,6 +64,7 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
         height: 50px;
         color: #fff;
         text-align: center;
+        margin-bottom : 50px;
         }
 
         a {
@@ -80,7 +81,7 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
         }
 
         .nav-link:hover {
-        color: #DB6DD0;
+        color: #045676;
         }
 
         .nav-link-left {
@@ -144,7 +145,7 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
 
         button {
             width: 20%; 
-            background-color:#DB6DD0;
+            background-color:#3081D0;
             color: #fff;
             padding: 10px;
             border: none;
@@ -156,7 +157,7 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
         }
 
         button:hover {
-        background-color: #CB0CB8;
+        background-color: #045676;
         }
     </style>
 </head>
@@ -184,3 +185,7 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
     
 </body>
 </html>
+<?php
+// Tutup koneksi database
+mysqli_close($koneksi);
+?>

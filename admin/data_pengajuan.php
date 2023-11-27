@@ -67,7 +67,7 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
         }
 
         .nav-link:hover {
-            color: #CB0CB8;
+            color: #045676;
         }
 
         .nav-link-left {
@@ -93,17 +93,23 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
             margin-right: 10px;
         }
 
+        /* konten */
         .content {
             padding: 50px;
+            text-align: center;
+            background-color: #fff; /* Set background color */
+            border-radius: 10px; /* Add some border-radius for a rounded appearance */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+            margin-top: 20px; /* Provide some space from the header */
         }
 
+        /* Style for the table */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            border: 2px solid #ddd;
         }
-
-       
 
         th, td {
             padding: 12px;
@@ -113,13 +119,19 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
 
         th {
             text-align: center;
-            background-color: #B3B3B3;
+            background-color: #3081D0;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
         }
 
 
 
         h2 {
-            margin-bottom: 20px;
+            color: #333;
+            margin: 0;
         }
         /* Tambahkan style untuk link logout */
         .logout-link {
@@ -177,7 +189,7 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
 <body>
     <header>
         <div class="logo">
-            <img src="../logo.png" alt="Logo">
+            <img src="../asset/logo.png" alt="Logo">
             <h2>Pendataan Desa Kali Sari</h2>
         </div>
 
@@ -187,7 +199,7 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
             <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
             <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
             <a>Admin <?php echo $_SESSION['username']; ?></a>
-            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
+            <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>
 
@@ -244,5 +256,20 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
         </table>
 
     </div>
+
+    <script>
+        function confirmLogout() {
+                var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
+                if (confirmLogout) {
+                    window.location.href = "../logout.php";
+                }
+        }
+    </script>
+
 </body>
 </html>
+
+<?php
+// Tutup koneksi database
+mysqli_close($koneksi);
+?>

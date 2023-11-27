@@ -84,3 +84,9 @@ if (isset($_GET['nik'])) {
     <a href="data_pengajuan.php">Kembali</a>
 </body>
 </html>
+
+
+<?php
+// Tutup koneksi database
+mysqli_close($koneksi);
+?>

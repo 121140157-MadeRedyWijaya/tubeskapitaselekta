@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .nav-link:hover {
-            color: #CB0CB8;
+            color: #045676;
         }
 
         .nav-link-left {
@@ -156,58 +156,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         /* konten  */
         .content {
-            padding: 50px;
+            padding: 20px; 
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
         }
 
-        h2 {
-            color: #ff1493;
+        h2{
+            color: #333;
+            margin: 0;
         }
 
         form {
             margin-top: 20px;
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap; /* Memungkinkan elemen untuk melibatkan ke baris baru jika tidak cukup ruang */
+            flex-wrap: wrap; 
         }
 
         .form-group {
-            flex: 0 0 48%; /* 48% agar ada ruang antar elemen dan tidak melebihi lebar parent */
+            flex: 0 0 50%; 
             margin-bottom: 15px;
         }
 
         label {
             font-weight: bold;
-            display: block; /* Membuat label menjadi block untuk memastikan label dan input pada baris yang berbeda */
+            display: block; 
         }
 
         input[type="text"],
         input[type="date"],
         input[type="file"],
         input[type="hidden"] {
-            /* padding: 10px;
-            border-radius: 10px;
-            border: 1px solid #ddd;*/
             width: 100%;
-            width: 367.514px; 
-        height: 34.229px;
-        flex-shrink: 0;
-        border-radius: 9.908px;
-        border: 0.225px solid #000;
-        background: #EDF2F7;
-        }
+            width: 380.514px; 
+            height: 34.229px;
+            flex-shrink: 0;
+            border-radius: 9.908px;
+            border: 0.225px solid #000;
+            background: #EDF2F7;
+            }
 
-        input[type="submit"] {
+            input[type="submit"] {
+            display: block;
+            margin: 0 auto; 
             padding: 10px;
             border-radius: 5px;
             border: none;
-            background-color: #e86bd9;
+            background-color: #3081D0;
             color: white;
             cursor: pointer;
             width: 10%;
         }
 
         input[type="submit"]:hover {
-            background-color: #e332ce;
+            background-color: #045676;
         }
 
         p {
@@ -229,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <header>
         <div class="logo">
-            <img src="../logo.png" alt="Logo">
+            <img src="../asset/logo.png" alt="Logo">
             <h2>Pendataan Desa Kali Sari</h2>
         </div>
 
@@ -238,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="data_form.php" class="nav-link nav-link-right">Formulir</a>
             <a href="application_table.php" class="nav-link nav-link-right">Pengajuan</a>
             <a><?php echo $_SESSION['username']; ?></a>
-            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
+            <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>
     
@@ -292,7 +297,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function confirmSubmission() {
             return confirm('Apakah Anda yakin ingin mengirim formulir?');
         }
+
+        function confirmLogout() {
+                var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
+                if (confirmLogout) {
+                    window.location.href = "../logout.php";
+                }
+        }
     </script>
 
 </body>
 </html>
+
+<?php
+// Tutup koneksi database
+mysqli_close($koneksi);
+?>

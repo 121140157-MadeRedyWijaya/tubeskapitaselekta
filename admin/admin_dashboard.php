@@ -73,7 +73,7 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
         }
 
         .nav-link:hover {
-            color: #CB0CB8;
+            color: #045676;
         }
 
         .nav-link-left {
@@ -99,9 +99,14 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
             margin-right: 10px;
         }
 
-        /* info box */
-        .content{
+        /* konten */
+        .content {
             padding: 50px;
+            text-align: center;
+            background-color: #fff; /* Set background color */
+            border-radius: 10px; /* Add some border-radius for a rounded appearance */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+            margin-top: 20px; /* Provide some space from the header */
         }
 
         .info-box-container {
@@ -157,7 +162,7 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
 <body>
     <header>
     <div class="logo">
-        <img src="../logo.png" alt="Logo">
+        <img src="../asset/logo.png" alt="Logo">
         <h2>Pendataan Desa Kali Sari</h2>
     </div>
 
@@ -167,7 +172,7 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
         <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
         <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
         <a>Admin <?php echo $_SESSION['username']; ?></a>
-        <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
+        <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
     </div>
 
   
@@ -178,7 +183,7 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
     
 
     <div class="content">
-     
+        <h2>Informasi Pendataan Warga Desa</h2>
         <!-- Info Box Container -->
         <div class="info-box-container">
             <!-- Info Box 1 -->
@@ -202,6 +207,14 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
         
     </div>
 
+    <script>
+        function confirmLogout() {
+                var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
+                if (confirmLogout) {
+                    window.location.href = "../logout.php";
+                }
+        }
+    </script>
 
 
 </body>

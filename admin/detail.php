@@ -68,9 +68,20 @@ if (isset($_POST['konfirmasi'])) {
     </style>
 </head>
 <body>
-    <form method="post" action="detail.php?nik=<?php echo $nik; ?>">
-        <input type="submit" name="konfirmasi" value="Terima Data Warga">
-    </form>
-    <a href="data_pengajuan.php">Kembali</a>
+<div class="container">
+        <?php
+        // ... (your PHP code remains unchanged)
+        ?>
+
+        <form method="post" action="detail.php?nik=<?php echo $nik; ?>">
+            <input type="submit" name="konfirmasi" value="Terima Data Warga">
+        </form>
+        <a href="data_pengajuan.php">Kembali</a>
+    </div>
 </body>
 </html>
+
+<?php
+// Tutup koneksi database
+mysqli_close($koneksi);
+?>

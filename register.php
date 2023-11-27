@@ -19,6 +19,7 @@ include 'koneksi.php';
         height: 50px;
         color: #fff;
         text-align: center;
+        margin-bottom : 50px;
         }
 
         a {
@@ -35,7 +36,7 @@ include 'koneksi.php';
         }
 
         .nav-link:hover {
-        color: #DB6DD0;
+        color: #045676;
         }
 
         .nav-link-left {
@@ -53,13 +54,15 @@ include 'koneksi.php';
         color:#2F2F2F;
         }
 
+        
+
         .form-container {
-        width: 300px;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        background-color: #fff;
-        border-radius: 5px;
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
         }
 
         .form-group {
@@ -88,7 +91,7 @@ include 'koneksi.php';
         height: 30px;
         }
 
-        input[type="email"] {
+        input[type="nomorhp"] {
         height: 30px;
         }
 
@@ -99,7 +102,7 @@ include 'koneksi.php';
 
         button {
             width: 20%; 
-            background-color:#DB6DD0;
+            background-color:#3081D0;
             color: #fff;
             padding: 10px;
             border: none;
@@ -111,7 +114,7 @@ include 'koneksi.php';
         }
 
         button:hover {
-        background-color: #CB0CB8;
+        background-color: #045676;
         }
     </style>
 
@@ -129,8 +132,8 @@ include 'koneksi.php';
             <div class="form-group">
                 <label for="id">ID/Username</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan ID/Username" required>
-                <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Alamat Email" required>
+                <label for="nomorhp">Nomor HP</label>
+                <input type="nomorhp" class="form-control" id="nomorhp" name="nomorhp" placeholder="Masukkan Nomor HP" required>
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
             </div>
@@ -157,7 +160,7 @@ include 'koneksi.php';
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
-    $email = $_POST['email'] ?? '';
+    $nomorhp = $_POST['nomorhp'] ?? '';
     $password = $_POST['password'] ?? '';
     $role = 'warga';
 
@@ -175,9 +178,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Username sudah digunakan. Silakan pilih username lain.";
     } else {
         // Jika username belum ada, lanjutkan proses registrasi
-        $query = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO users (username, nomorhp, password, role) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($koneksi, $query);
-        mysqli_stmt_bind_param($stmt, "ssss", $username, $email, $password, $role);
+        mysqli_stmt_bind_param($stmt, "ssss", $username, $nomorhp, $password, $role);
 
         if (mysqli_stmt_execute($stmt)) {
             echo "<script>alert('Pendaftaran Akun Berhasil');</script>";

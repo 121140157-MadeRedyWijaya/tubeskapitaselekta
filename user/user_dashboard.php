@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #fff5f5;
+            background-color: #f4f4f4;
         }
 
         /* Header */
@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .nav-link:hover {
-            color: #CB0CB8;
+            color: #045676;
         }
 
         .nav-link-left {
@@ -129,14 +129,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .content {
             padding: 50px;
             text-align: center;
-            background-color: #fff; /* Set background color */
-            border-radius: 10px; /* Add some border-radius for a rounded appearance */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
-            margin-top: 20px; /* Provide some space from the header */
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            margin-top: 20px; 
         }
 
-        h2 {
-            color: #ff1493;
+        h2{
+            color: #333;
+            margin: 0;
         }
 
         form {
@@ -160,14 +161,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             padding: 10px;
             border-radius: 5px;
             border: none;
-            background-color: #e86bd9;
+            background-color: #3081D0;
             color: white;
             cursor: pointer;
             width: 8%;
         }
 
         input[type="submit"]:hover {
-            background-color: #e332ce;
+            background-color: #045676;
         }
 
         p {
@@ -180,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <div class="logo">
-            <img src="../logo.png" alt="Logo">
+            <img src="../asset/logo.png" alt="Logo">
             <h2>Pendataan Desa Kali Sari</h2>
         </div>
 
@@ -188,21 +189,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="user_dashboard.php" class="nav-link nav-link-right">Dashboard</a>
             <a href="data_form.php" class="nav-link nav-link-right">Formulir</a>
             <a href="application_table.php" class="nav-link nav-link-right">Pengajuan</a>
-            <a>Warga <?php echo $_SESSION['username']; ?></a>
-            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
+            <a><?php echo $_SESSION['username']; ?></a>
+            <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>
 
 
     <div class="content">
-        <h2>Welcome, User <?php echo $_SESSION['username']; ?></h2>
-        
-        <p>This is the user dashboard.</p>
+        <h2>Cek Data di Sistem Desa</h2>
 
-        <h2>Cek Data di Database</h2>
+        <p>Sebelum anda mendaftarkan diri anda ke sistem desa, jangan lupa untuk mengecek <br> terlebih dahulu apakah data anda sudah terdaftar atau belum di form pengecekan ini!</p>
+
         <form method="post" action="">
             <label for="nik">NIK:</label><br>
-            <input type="text" id="nik" name="nik" required><br><br>
+            <input type="text" id="nik" name="nik" placeholder="Masukkan NIK dari Kartu Keluarga" required><br><br>
             <label for="tanggal_lahir">Tanggal Lahir:</label><br>
             <input type="date" id="tanggal_lahir" name="tanggal_lahir" required><br><br>
             <input type="submit" value="Cek Data">
@@ -214,6 +214,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
     </div>
 
+    <script>
+        function confirmLogout() {
+            var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
+            if (confirmLogout) {
+                window.location.href = "../logout.php";
+            }
+        }
+    </script>
     
 </body>
 </html>
+<?php
+// Tutup koneksi database
+mysqli_close($koneksi);
+?>

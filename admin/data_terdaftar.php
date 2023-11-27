@@ -60,7 +60,7 @@ $num_rows = mysqli_num_rows($result);
         }
 
         .nav-link:hover {
-            color: #CB0CB8;
+            color: #045676;
         }
 
         .nav-link-left {
@@ -89,35 +89,42 @@ $num_rows = mysqli_num_rows($result);
         /* konten */
         .content {
             padding: 50px;
+            text-align: center;
+            background-color: #fff; /* Set background color */
+            border-radius: 10px; /* Add some border-radius for a rounded appearance */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+            margin-top: 20px; /* Provide some space from the header */
         }
 
-        h2 {
-            color: #ff1493;
+        header h2{
+            color: #333;
+            margin: 0;
         }
 
+        /* Style for the table */
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            border: 2px solid #e86bd9;
+            border: 2px solid #ddd;
         }
 
         th, td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
-            border-right: 1px solid #ddd;
         }
 
         th {
             text-align: center;
-            background-color: #e86bd9;
+            background-color: #3081D0;
             color: white;
         }
 
         tr:hover {
             background-color: #f5f5f5;
         }
+
 
         .button-lihat {
             width: 70px;
@@ -192,7 +199,7 @@ $num_rows = mysqli_num_rows($result);
 
     <header>
         <div class="logo">
-            <img src="../logo.png" alt="Logo">
+            <img src="../asset/logo.png" alt="Logo">
             <h2>Pendataan Desa Kali Sari</h2>
         </div>
 
@@ -202,7 +209,7 @@ $num_rows = mysqli_num_rows($result);
             <a href="data_terdaftar.php" class="nav-link nav-link-right">Warga</a>
             <a href="data_user.php" class="nav-link nav-link-right">Akun</a>
             <a>Admin <?php echo $_SESSION['username']; ?></a>
-            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
+            <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>
 
@@ -236,13 +243,13 @@ $num_rows = mysqli_num_rows($result);
                     echo "<td>{$row['nama']}</td>";
                     echo "<td class='detail'>
                             <form action='detail_warga.php' method='get'>
-                                <input type='hidden' name='nik' value='{$row['nik']}'>
+                            <input type='hidden' name='nik' value='{$row['nik']}'>
                                 <button class='button-lihat' type='submit'>Lihat</button>
-                            </form>
-                          </td>";
-                    echo "</tr>";
-                }
-                ?>
+                                </form>
+                                </td>";
+                                echo "</tr>";
+                            }
+                            ?>
             </tbody>
         </table>
     </div>
@@ -256,7 +263,7 @@ $num_rows = mysqli_num_rows($result);
             filter = input.value.toUpperCase();
             table = document.getElementById("wargaTable");
             tr = table.getElementsByTagName("tr");
-
+            
             // Loop melalui semua baris dan sembunyikan yang tidak sesuai
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[2]; // Ganti angka 1 dengan indeks kolom yang ingin Anda cari
@@ -270,6 +277,14 @@ $num_rows = mysqli_num_rows($result);
                 }
             }
         }
+        
+        function confirmLogout() {
+                var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
+                if (confirmLogout) {
+                    window.location.href = "../logout.php";
+                }
+        }
+    
     </script>
 
 </body>

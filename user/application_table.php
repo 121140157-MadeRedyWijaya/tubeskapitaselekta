@@ -62,7 +62,7 @@ $result = mysqli_stmt_get_result($stmt);
         }
 
         .nav-link:hover {
-            color: #CB0CB8;
+            color:#045676;
         }
 
         .nav-link-left {
@@ -91,10 +91,17 @@ $result = mysqli_stmt_get_result($stmt);
         /* konten */
         .content {
             padding: 50px;
+            text-align: center;
+            background-color: #fff; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            margin-top: 20px; 
         }
 
         h2 {
             text-align: center;
+            color: #333;
+            margin: 0;
         }
 
         table {
@@ -113,7 +120,9 @@ $result = mysqli_stmt_get_result($stmt);
         }
 
         th {
-            background-color: lightgray;
+            text-align: center;
+            color: #FFFF;
+            background-color: #3081D0;
         }
 
         tr:nth-child(even) {
@@ -191,7 +200,7 @@ $result = mysqli_stmt_get_result($stmt);
 
     <header>
         <div class="logo">
-            <img src="../logo.png" alt="Logo">
+            <img src="../asset/logo.png" alt="Logo">
             <h2>Pendataan Desa Kali Sari</h2>
         </div>
 
@@ -200,7 +209,7 @@ $result = mysqli_stmt_get_result($stmt);
             <a href="data_form.php" class="nav-link nav-link-right">Formulir</a>
             <a href="application_table.php" class="nav-link nav-link-right">Pengajuan</a>
             <a><?php echo $_SESSION['username']; ?></a>
-            <a href="../logout.php" class="nav-link"><img src="../i-logout.png" alt="Logout" width="50"></a>
+            <a href="#" onclick="confirmLogout()" class="nav-link"><img src="../asset/i-logout.png" alt="Logout" width="50"></a>
         </div>
     </header>
 
@@ -224,7 +233,7 @@ $result = mysqli_stmt_get_result($stmt);
                 while ($row = mysqli_fetch_assoc($result)) {
                     // Tentukan class status berdasarkan nilai diproses
                     $statusClass = $row['diproses'] == 1 ? 'status-sudah-diproses' : 'status-sedang-diproses';
-
+                    
                     echo "<tr>";
                     echo "<td>" . $row['nik'] . "</td>";
                     echo "<td>" . $row['tanggal_lahir'] . "</td>";
@@ -251,7 +260,7 @@ $result = mysqli_stmt_get_result($stmt);
         ?>
     </div>
 
-    <!-- Tambahkan script JavaScript untuk konfirmasi batal -->
+    <!-- Tambahkan script JavaScript untuk konfirmasi  -->
     <script>
         function konfirmasiBatal(id) {
             var konfirmasi = confirm("Apakah Anda yakin ingin membatalkan pengajuan?");
@@ -259,7 +268,19 @@ $result = mysqli_stmt_get_result($stmt);
                 window.location.href = 'batal_pengajuan.php?id=' + id;
             }
         }
+
+        function confirmLogout() {
+                    var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
+                    if (confirmLogout) {
+                        window.location.href = "../logout.php";
+                    }
+            }
     </script>
 
 </body>
 </html>
+
+<?php
+// Tutup koneksi database
+mysqli_close($koneksi);
+?>
