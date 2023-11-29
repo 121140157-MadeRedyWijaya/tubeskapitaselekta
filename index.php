@@ -11,7 +11,7 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins';
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;

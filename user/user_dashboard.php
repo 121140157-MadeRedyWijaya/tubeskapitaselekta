@@ -34,10 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Periksa apakah data ditemukan atau tidak
     if (mysqli_num_rows($result) > 0) {
         $data = mysqli_fetch_assoc($result);
-        $result = "Data ditemukan dalam database.";
-        // Tambahkan logika atau tindakan tambahan jika diperlukan
+        $result = "INFO : WARGA SUDAH TERDAFTAR";
+        
     } else {
-        $result = "Data tidak ditemukan dalam database.";
+        $result = "INFO : WARGA BELUM TERDAFTAR, PILIH <a href='data_form.php'>FORMULIR</a>";
     }
 
     // Tutup statement
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>User Dashboard</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins';
             background-color: #f4f4f4;
         }
 
@@ -164,6 +164,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-top: 20px;
         }
 
+        #hasil{
+            font-size: 20px;
+            color:red;
+            font-weight: bold;
+        }
+
 
     </style>
 </head>
@@ -189,7 +195,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2>Cek Data di Sistem Desa</h2>
 
         <p>Sebelum anda mendaftarkan diri anda ke sistem desa, jangan lupa untuk mengecek <br> terlebih dahulu apakah data anda sudah terdaftar atau belum di form pengecekan ini!</p>
-
+        
+        <p id="hasil"><?php echo $result; ?></p>
         <form method="post" action="">
             <label for="nik">NIK:</label><br>
             <input type="text" id="nik" name="nik" placeholder="Masukkan NIK dari Kartu Keluarga" required><br><br>
@@ -198,7 +205,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="submit" value="Cek Data">
         </form>
 
-        <p><?php echo $result; ?></p>
         
 
         

@@ -37,7 +37,7 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
     <title>Admin Dashboard</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins';
             background-color: #f4f4f4;
         }
         /* Header */
@@ -103,10 +103,14 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
         .content {
             padding: 50px;
             text-align: center;
-            background-color: #fff; /* Set background color */
-            border-radius: 10px; /* Add some border-radius for a rounded appearance */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
-            margin-top: 20px; /* Provide some space from the header */
+            background-color: #fff; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            margin-top: 20px; 
+        }
+
+        .content h2{
+            color : #1c1b1b;
         }
 
         .info-box-container {
@@ -124,22 +128,22 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
         }
 
         .info-box:nth-child(1) {
-            background-color: #ffcc66; /* Warna untuk Info Box 1 */
-            color: white;
+            background-color: #ffcc66; 
+            color: #1c1b1b;
         }
 
         .info-box:nth-child(2) {
-            background-color: #66cc66; /* Warna untuk Info Box 2 */
-            color: white;
+            background-color: #66cc66; 
+            color: #1c1b1b;
         }
 
         .info-box:nth-child(3) {
-            background-color: #3db0ef; /* Warna untuk Info Box 3 */
-            color: white;
+            background-color: #3db0ef; 
+            color: #1c1b1b;
         }
 
         .info-box:last-child {
-            margin-right: 0; /* Menghapus margin-right pada info-box terakhir */
+            margin-right: 0; 
         }
 
         .info-box h3 {

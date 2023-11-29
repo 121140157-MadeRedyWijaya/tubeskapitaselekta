@@ -25,7 +25,7 @@ $result = mysqli_stmt_get_result($stmt);
     <title>Data Table</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins';
             background-color: #f4f4f4;
         }
 
@@ -156,9 +156,7 @@ $result = mysqli_stmt_get_result($stmt);
             background-color: #2980b9;
         }
 
-         /* Tambahkan style untuk tombol batal */
-        /* Tambahkan style untuk tombol detail dan batal */
-   
+
 
         .detail-link,
         .batal-link {
@@ -168,7 +166,7 @@ $result = mysqli_stmt_get_result($stmt);
         }
 
         .batal-link {
-            background-color: #e74c3c; /* Merah */
+            background-color: #e74c3c; 
             color: white;
             padding: 8px 16px;
             text-align: center;
@@ -179,7 +177,7 @@ $result = mysqli_stmt_get_result($stmt);
         }
 
         .batal-link:hover {
-            background-color: #c0392b; /* Merah tua saat dihover */
+            background-color: #c0392b; 
         }
 
     </style>
@@ -207,7 +205,7 @@ $result = mysqli_stmt_get_result($stmt);
         <h2>Tabel Data Pengajuan</h2>
         <?php
         if (mysqli_num_rows($result) > 0) {
-            // Tampilkan tabel jika ada data
+          
             ?>
             <table>
                 <tr>
@@ -228,8 +226,7 @@ $result = mysqli_stmt_get_result($stmt);
                     echo "<td>" . $row['nama'] . "</td>";
                     echo "<td class='detail-batal-container'>";
                     echo "<a class='detail-link' href='detail_pengajuan.php?id={$row['id']}'>Detail</a>";
-                    // Tambahkan tombol batal dengan konfirmasi JavaScript
-                    // Tambahkan kondisi untuk menampilkan tombol batal hanya jika status belum diproses
+
                     if ($row['diproses'] == 0) {
                         echo "<a class='batal-link' href='javascript:void(0);' onclick='konfirmasiBatal({$row['id']})'>Batalkan</a>";
                     }

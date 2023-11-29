@@ -22,7 +22,7 @@ $num_rows = mysqli_num_rows($result);
     <title>Data Warga Terdaftar</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins';
             background-color: #f4f4f4;
         }
 
@@ -110,8 +110,8 @@ $num_rows = mysqli_num_rows($result);
 
         th {
             text-align: center;
-            background-color: #3081D0;
-            color: white;
+            background-color: #3db0ef;
+            color: #1c1b1b;
         }
 
         tr:hover {
@@ -133,7 +133,7 @@ $num_rows = mysqli_num_rows($result);
             background-color: #45a049;
         }
 
-        /* Style for search input */
+    
         label.search-label {
             margin-right: 10px;
             font-weight: bold;
@@ -144,14 +144,14 @@ $num_rows = mysqli_num_rows($result);
             margin-bottom: 10px;
         }
 
-        /* Style for data info */
+  
         .count-info {
             margin-top: 10px;
             font-weight: bold;
         }
 
 
-        /* Tambahkan style untuk link logout */
+     
         .logout-link {
             position: absolute;
             bottom: 20px;
@@ -163,13 +163,11 @@ $num_rows = mysqli_num_rows($result);
         .logout-link:hover {
             text-decoration: underline;
         }
-        /* detail */
+     
         .detail {
             text-align: center;
         }
-        /* detail buttons */
-        /* Tambahkan style untuk tombol detail */
-        /* Tambahkan style untuk tombol detail Periksa */
+
         .button-lihat {
             width: 70px;
             padding: 8px 12px;

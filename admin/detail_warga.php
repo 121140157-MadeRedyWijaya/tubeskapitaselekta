@@ -5,60 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Data</title>
     <style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f9f9f9;
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh; /* Set the height to the full viewport height */
-        text-align: left; /* Align text to the left */
-    }
+        body {
+            font-family: 'Poppins';
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; 
+            text-align: left; 
+        }
 
-    h2 {
-        color: #333;
-        border-bottom: 2px solid #333;
-        padding-bottom: 10px;
-        text-align: center; /* Center the header text */
-    }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            text-align: center; 
+        }
 
-    p {
-        margin: 10px 0;
-        color: #555;
-        text-align: left; /* Align text to the left */
-        padding-left: 20px; /* Add left padding (adjust as needed) */
-    }
+        p {
+            margin: 10px 0;
+            color: #555;
+            text-align: left; 
+            padding-left: 20px; 
+        }
 
-    a {
-        color: #0066cc;
-        text-decoration: none;
-    }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
 
-    a:hover {
-        text-decoration: underline;
-    }
+        a:hover {
+            text-decoration: underline;
+        }
 
-    form {
-        margin-top: 20px;
-        text-align: center; /* Center the form text */
-    }
+        form {
+            margin-top: 20px;
+            text-align: center; 
+        }
 
-    input[type="submit"] {
-        background-color: #4caf50;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-    }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
-    input[type="submit"]:hover {
-        background-color: #45a049;
-    }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
 </style>
 
 </head>

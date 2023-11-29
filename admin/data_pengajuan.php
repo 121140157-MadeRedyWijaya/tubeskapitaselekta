@@ -30,7 +30,7 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
     <title>Data Pengajuan</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins';
             background-color: #f4f4f4;
         }
 
@@ -117,11 +117,21 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
             border-bottom: 1px solid #ddd;
         }
 
-        th {
+        #th1 {
             text-align: center;
-            background-color: #3081D0;
-            color: white;
+            background-color: #ffcc66;
+            color: #1c1b1b;
         }
+        #th2 {
+            text-align: center;
+            background-color: #66cc66;
+            color: #1c1b1b;
+        }
+
+
+
+
+
 
         tr:hover {
             background-color: #f5f5f5;
@@ -133,7 +143,7 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
             color: #333;
             margin: 0;
         }
-        /* Tambahkan style untuk link logout */
+      
         .logout-link {
             position: absolute;
             bottom: 20px;
@@ -146,13 +156,11 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
             text-decoration: underline;
         }
 
-        /* detail */
+      
         .detail {
             text-align: center;
         }
-        /* detail buttons */
-        /* Tambahkan style untuk tombol detail */
-        /* Tambahkan style untuk tombol detail Periksa */
+ 
         .button-periksa {
             width: 70px;
             padding: 8px 12px;
@@ -166,8 +174,22 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
         .button-periksa:hover {
             background-color: #45a049;
         }
+
+        .button-hapus {
+            width: 70px;
+            padding: 8px 12px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
         
-        /* Tambahkan style untuk tombol detail Lihat */
+        .button-hapus:hover {
+            background-color: #c0392b;
+        }
+        
+    
         .button-lihat {
             width: 70px;
             padding: 8px 12px;
@@ -209,11 +231,11 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
         <p>Jumlah Data Belum Diproses: <?php echo $numRowsBelumDiproses; ?></p>
         <table border='1'>
             <tr>
-                <th style="width: 15%;">Tanggal Pengajuan</th>
-                <th style="width: 20%;">NIK</th>
-                <th style="width: 15%;">Tanggal Lahir</th>
-                <th style="width: 30%;">Nama</th>
-                <th style="width: 10%;">Detail</th>
+                <th id="th1" style="width: 15%;">Tanggal Pengajuan</th>
+                <th id="th1" style="width: 20%;">NIK</th>
+                <th id="th1" style="width: 15%;">Tanggal Lahir</th>
+                <th id="th1" style="width: 25%;">Nama</th>
+                <th id="th1" style="width: 15%;">Detail</th>
             </tr>
 
             <?php
@@ -223,7 +245,13 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
                 echo "<td>" . $row['nik'] . "</td>";
                 echo "<td>" . $row['tanggal_lahir'] . "</td>";
                 echo "<td>" . $row['nama'] . "</td>";
-                echo "<td class='detail'><form action='detail.php' method='get'><input type='hidden' name='nik' value='" . $row['nik'] . "'><button class='button-periksa' type='submit'>Periksa</button></form></td>";
+                echo "<td class='detail'>
+                        <form style='display: inline-block;' action='detail.php' method='get'>
+                            <input type='hidden' name='nik' value='" . $row['nik'] . "'>
+                            <button class='button-periksa' type='submit'>Periksa</button>
+                        </form>
+                        <button class='button-hapus' onclick='confirmDelete(\"" . $row['nik'] . "\")'>Hapus</button>
+                    </td>";
                 echo "</tr>";
             }
             ?>
@@ -235,11 +263,11 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
         <p>Jumlah Data Sudah Diproses: <?php echo $numRowsSudahDiproses; ?></p>
         <table border='1'>
             <tr>
-            <th style="width: 15%;">Tanggal Pengajuan</th>
-                <th style="width: 20%;">NIK</th>
-                <th style="width: 15%;">Tanggal Lahir</th>
-                <th style="width: 30%;">Nama</th>
-                <th style="width: 10%;">Detail</th>
+                <th id="th2" style="width: 15%;">Tanggal Pengajuan</th>
+                <th id="th2" style="width: 20%;">NIK</th>
+                <th id="th2" style="width: 15%;">Tanggal Lahir</th>
+                <th id="th2" style="width: 25%;">Nama</th>
+                <th id="th2" style="width: 15%;">Detail</th>
             </tr>
 
             <?php
@@ -249,7 +277,13 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
                 echo "<td>" . $row['nik'] . "</td>";
                 echo "<td>" . $row['tanggal_lahir'] . "</td>";
                 echo "<td>" . $row['nama'] . "</td>";
-                echo "<td class='detail'><form action='detail_diterima.php' method='get'><input type='hidden' name='nik' value='" . $row['nik'] . "'><button class='button-lihat' type='submit'>Lihat</button></form></td>";
+                echo "<td class='detail'>
+                        <form style='display: inline-block;' action='detail_diterima.php' method='get'>
+                            <input type='hidden' name='nik' value='" . $row['nik'] . "'>
+                            <button class='button-lihat' type='submit'>Lihat</button>
+                        </form>
+                        <button class='button-hapus' onclick='confirmDelete(\"" . $row['nik'] . "\")'>Hapus</button>
+                    </td>";
                 echo "</tr>";
             }
             ?>
@@ -264,6 +298,14 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
                     window.location.href = "../logout.php";
                 }
         }
+  
+        function confirmDelete(nik) {
+            var isConfirmed = confirm("Apakah Anda yakin ingin menghapus data pengajuan?");
+            if (isConfirmed) {
+                window.location.href = "hapus_pengajuan.php?nik=" + nik;
+            }
+        }
+
     </script>
 
 </body>

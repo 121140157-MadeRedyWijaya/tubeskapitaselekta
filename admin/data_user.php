@@ -23,7 +23,7 @@ $num_rows = mysqli_num_rows($result);
     <title>Data User</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins';
             background-color: #f4f4f4;
         }
 
@@ -113,7 +113,7 @@ $num_rows = mysqli_num_rows($result);
         th {
             text-align: center;
             background-color: #3081D0;
-            color: white;
+            color: #1c1b1b;
         }
 
         tr:hover {
@@ -153,6 +153,22 @@ $num_rows = mysqli_num_rows($result);
         .logout-link:hover {
             text-decoration: underline;
         }
+
+        .button-hapus {
+            width: 70px;
+            padding: 8px 12px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .button-hapus:hover {
+            background-color: #c0392b;
+        }
+
+
     </style>
 </head>
 
@@ -187,6 +203,7 @@ $num_rows = mysqli_num_rows($result);
                 <th>Username</th>
                 <th>Nomor HP</th>
                 <th>Role</th>
+                <th style="width: 10%;" >Aksi</th>
             </tr>
             <?php
             // Menampilkan data pengguna dari hasil query
@@ -195,6 +212,7 @@ $num_rows = mysqli_num_rows($result);
                 echo "<td>" . $row['username'] . "</td>";
                 echo "<td>" . $row['nomorhp'] . "</td>";
                 echo "<td>" . $row['role'] . "</td>";
+                echo "<td><button class='button-hapus' onclick='confirmDelete(\"" . $row['username'] . "\")'>Hapus</button></td>";
                 echo "</tr>";
             }
             ?>
@@ -227,10 +245,17 @@ $num_rows = mysqli_num_rows($result);
         }
 
         function confirmLogout() {
-                var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
-                if (confirmLogout) {
-                    window.location.href = "../logout.php";
-                }
+            var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
+            if (confirmLogout) {
+                window.location.href = "../logout.php";
+            }
+        }
+
+        function confirmDelete(username) {
+            var isConfirmed = confirm("Apakah Anda yakin ingin menghapus akun dengan username '" + username + "'?");
+            if (isConfirmed) {
+                window.location.href = "hapus_user.php?username=" + username;
+            }
         }
     </script>
 
