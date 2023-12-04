@@ -194,7 +194,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="content">
         <h2>Cek Data di Sistem Desa</h2>
 
-        <p>Sebelum anda mendaftarkan diri anda ke sistem desa, jangan lupa untuk mengecek <br> terlebih dahulu apakah data anda sudah terdaftar atau belum di form pengecekan ini!</p>
+        <p>Sebelum anda mendaftarkan diri anda ke sistem desa, jangan lupa untuk mengecek <br> terlebih dahulu apakah anda sudah melakukan pendataan sebelumnya!</p>
         
         <p id="hasil"><?php echo $result; ?></p>
         <form method="post" action="">

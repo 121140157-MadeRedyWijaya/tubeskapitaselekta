@@ -166,22 +166,39 @@ $num_rows = mysqli_num_rows($result);
      
         .detail {
             text-align: center;
+            display: flex;
+            justify-content: center;
         }
 
-        .button-lihat {
+
+        .button-hapus {
             width: 70px;
             padding: 8px 12px;
-            background-color: #4CAF50;
+            background-color: #e74c3c;
             color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
         
-        .button-lihat:hover {
-            background-color: #45a049;
+        .button-hapus:hover {
+            background-color: #c0392b;
         }
         
+    
+        .button-lihat {
+            width: 70px;
+            padding: 8px 12px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .button-lihat:hover {
+            background-color: #2980b9;
+        }
 
 
     </style>
@@ -221,7 +238,7 @@ $num_rows = mysqli_num_rows($result);
                     <th style="width: 20%;">NIK</th>
                     <th style="width: 15%;">Tanggal Lahir</th>
                     <th style="width: 30%;">Nama</th>
-                    <th style="width: 10%;">Detail</th>
+                    <th style="width: 15%;">Detail</th>
                 </tr>
             </thead>
             <tbody>
@@ -237,8 +254,12 @@ $num_rows = mysqli_num_rows($result);
                             <input type='hidden' name='nik' value='{$row['nik']}'>
                                 <button class='button-lihat' type='submit'>Lihat</button>
                                 </form>
+                                <form action='hapus_warga.php' method='post' style='display: inline;' onsubmit='return confirmDelete()'>
+                                <input type='hidden' name='nik' value='{$row['nik']}'>
+                                <button class='button-hapus' type='submit'>Hapus</button>
+                                </form>
                                 </td>";
-                                echo "</tr>";
+                    echo "</tr>";
                             }
                             ?>
             </tbody>
@@ -275,6 +296,12 @@ $num_rows = mysqli_num_rows($result);
                     window.location.href = "../logout.php";
                 }
         }
+
+ 
+        function confirmDelete() {
+            return confirm("Apakah Anda yakin ingin menghapus data ini?");
+        }
+
     
     </script>
 

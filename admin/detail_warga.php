@@ -14,7 +14,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh; 
+            height: 180vh; 
             text-align: left; 
         }
 
@@ -78,13 +78,28 @@
 
         // Menampilkan detail data berdasarkan NIK
         if ($row = mysqli_fetch_assoc($result)) {
-            echo "<h2>Detail Data</h2>";
-            echo "<p><strong>NIK:</strong> " . $row['nik'] . "</p>";
-            echo "<p><strong>Tanggal Lahir:</strong> " . $row['tanggal_lahir'] . "</p>";
-            echo "<p><strong>Nama:</strong> " . $row['nama'] . "</p>";
-            echo "<p><strong>Agama:</strong> " . $row['agama'] . "</p>";
-            echo "<p><strong>Jenis Kelamin:</strong> " . $row['jenis_kelamin'] . "</p>";
-            echo "<p><strong>Alamat:</strong> " . $row['alamat'] . "</p>";
+            echo "<h2>Detail Warga</h2>";
+            echo "<p><strong>NIK: " . $row['nik'] . "</p>";
+            echo "<p><strong>No. KK: " . $row['no_kk'] . "</p>";
+            echo "<p><strong>Nama Lengkap: " . $row['nama'] . "</p>";
+            echo "<p><strong>Tempat Lahir: " . $row['tempat_lahir'] . "</p>";
+            echo "<p><strong>Tanggal Lahir: " . $row['tanggal_lahir'] . "</p>";
+            echo "<p><strong>Jenis Kelamin: " . $row['jenis_kelamin'] . "</p>";
+            echo "<p><strong>Agama: " . $row['agama'] . "</p>";
+            echo "<p><strong>Pendidikan Terakhir: " . $row['pendidikan_terakhir'] . "</p>";
+            echo "<p><strong>Pekerjaan: " . $row['pekerjaan'] . "</p>";
+            echo "<p><strong>Golongan Darah: " . $row['golongan_darah'] . "</p>";
+            echo "<p><strong>Status Kawin: " . $row['status_kawin'] . "</p>";
+            echo "<p><strong>Hubungan Dalam Keluarga: " . $row['hubungan'] . "</p>";
+            echo "<p><strong>Warga Negara: " . $row['warga_negara'] . "</p>";
+            echo "<p><strong>Suku/Etnis: " . $row['sukuetnis'] . "</p>";
+            echo "<p><strong>NIK Ayah: " . $row['nik_ayah'] . "</p>";
+            echo "<p><strong>Nama Ayah: " . $row['nama_ayah'] . "</p>";
+            echo "<p><strong>NIK Ibu: " . $row['nik_ibu'] . "</p>";
+            echo "<p><strong>Nama Ibu: " . $row['nama_ibu'] . "</p>";
+            echo "<p><strong>Status Penduduk: " . $row['status_penduduk'] . "</p>";
+            echo "<p><strong>Nomor Telepon: " . $row['no_telpon'] . "</p>";
+            echo "<p><strong>Alamat Sekarang: " . $row['alamat'] . "</p>";
 
             // Menampilkan link ke file KK dan KTP jika tersedia
             if (!empty($row['kk_filename'])) {

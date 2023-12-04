@@ -93,7 +93,7 @@ include 'koneksi.php';
         height: 30px;
         }
 
-        input[type="nomorhp"] {
+        input[type="namalengkap"] {
         height: 30px;
         }
 
@@ -134,8 +134,8 @@ include 'koneksi.php';
             <div class="form-group">
                 <label for="id">ID/Username</label>
                 <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan ID/Username" required>
-                <label for="nomorhp">Nomor HP</label>
-                <input type="nomorhp" class="form-control" id="nomorhp" name="nomorhp" placeholder="Masukkan Nomor HP" required>
+                <label for="namalengkap">Nama Lengkap</label>
+                <input type="namalengkap" class="form-control" id="namalengkap" name="namalengkap" placeholder="Masukkan Nomor HP" required>
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan Password" required>
             </div>
@@ -164,7 +164,7 @@ include 'koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
-    $nomorhp = $_POST['nomorhp'] ?? '';
+    $namalengkap = $_POST['namalengkap'] ?? '';
     $password = $_POST['password'] ?? '';
     $role = 'warga';
 
@@ -184,9 +184,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Jika username belum ada, lanjutkan proses registrasi
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "INSERT INTO users (username, nomorhp, password, role) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO users (username, namalengkap, password, role) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($koneksi, $query);
-        mysqli_stmt_bind_param($stmt, "ssss", $username, $nomorhp, $hashedPassword, $role);
+        mysqli_stmt_bind_param($stmt, "ssss", $username, $namalengkap, $hashedPassword, $role);
 
         if (mysqli_stmt_execute($stmt)) {
             echo "<script>alert('Pendaftaran Akun Berhasil');</script>";

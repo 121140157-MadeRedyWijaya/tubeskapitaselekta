@@ -13,7 +13,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh; 
+            height: 170vh; 
             text-align: left; 
         }
 
@@ -85,12 +85,28 @@
             // Menampilkan detail data berdasarkan NIK
             if ($row = mysqli_fetch_assoc($result)) {
                 echo "<h2>Detail Data</h2>";
-                echo "<p><strong>NIK:</strong> " . $row['nik'] . "</p>";
-                echo "<p><strong>Tanggal Lahir:</strong> " . $row['tanggal_lahir'] . "</p>";
-                echo "<p><strong>Nama:</strong> " . $row['nama'] . "</p>";
-                echo "<p><strong>Agama:</strong> " . $row['agama'] . "</p>";
-                echo "<p><strong>Jenis Kelamin:</strong> " . $row['jenis_kelamin'] . "</p>";
-                echo "<p><strong>Alamat:</strong> " . $row['alamat'] . "</p>";
+
+                echo "<p><strong>NIK: " . $row['nik'] . "</p>";
+                echo "<p><strong>No. KK: " . $row['no_kk'] . "</p>";
+                echo "<p><strong>Nama Lengkap: " . $row['nama'] . "</p>";
+                echo "<p><strong>Tempat Lahir: " . $row['tempat_lahir'] . "</p>";
+                echo "<p><strong>Tanggal Lahir: " . $row['tanggal_lahir'] . "</p>";
+                echo "<p><strong>Jenis Kelamin: " . $row['jenis_kelamin'] . "</p>";
+                echo "<p><strong>Agama: " . $row['agama'] . "</p>";
+                echo "<p><strong>Pendidikan Terakhir: " . $row['pendidikan_terakhir'] . "</p>";
+                echo "<p><strong>Pekerjaan: " . $row['pekerjaan'] . "</p>";
+                echo "<p><strong>Golongan Darah: " . $row['golongan_darah'] . "</p>";
+                echo "<p><strong>Status Kawin: " . $row['status_kawin'] . "</p>";
+                echo "<p><strong>Hubungan Dalam Keluarga: " . $row['hubungan'] . "</p>";
+                echo "<p><strong>Warga Negara: " . $row['warga_negara'] . "</p>";
+                echo "<p><strong>Suku/Etnis: " . $row['sukuetnis'] . "</p>";
+                echo "<p><strong>NIK Ayah: " . $row['nik_ayah'] . "</p>";
+                echo "<p><strong>Nama Ayah: " . $row['nama_ayah'] . "</p>";
+                echo "<p><strong>NIK Ibu: " . $row['nik_ibu'] . "</p>";
+                echo "<p><strong>Nama Ibu: " . $row['nama_ibu'] . "</p>";
+                echo "<p><strong>Status Penduduk: " . $row['status_penduduk'] . "</p>";
+                echo "<p><strong>Nomor Telepon: " . $row['no_telpon'] . "</p>";
+                echo "<p><strong>Alamat Sekarang: " . $row['alamat'] . "</p>";
 
                 // Menampilkan link ke file KK dan KTP jika tersedia
                 if (!empty($row['kk_filename'])) {
@@ -110,20 +126,23 @@
             $stmtUpdate = mysqli_prepare($koneksi, $queryUpdate);
             mysqli_stmt_bind_param($stmtUpdate, "s", $nik);
 
+            
+
             // Query untuk menambahkan duplikat data ke warga_terdaftar
-            $queryInsertTerdaftar = "INSERT INTO warga_terdaftar (nik, tanggal_lahir, nama, agama, jenis_kelamin, alamat, username) 
-                                    SELECT nik, tanggal_lahir, nama, agama, jenis_kelamin, alamat, username
+            $queryInsertTerdaftar = "INSERT INTO warga_terdaftar (nik, no_kk, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pendidikan_terakhir, pekerjaan, golongan_darah, status_kawin, hubungan, warga_negara, sukuetnis, nik_ayah, nama_ayah, nik_ibu, nama_ibu, status_penduduk, no_telpon, alamat, username) 
+                                    SELECT nik, no_kk, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pendidikan_terakhir, pekerjaan, golongan_darah, status_kawin, hubungan, warga_negara, sukuetnis, nik_ayah, nama_ayah, nik_ibu, nama_ibu, status_penduduk, no_telpon, alamat, username
                                     FROM warga_pengajuan WHERE nik = ?";
             $stmtInsertTerdaftar = mysqli_prepare($koneksi, $queryInsertTerdaftar);
             mysqli_stmt_bind_param($stmtInsertTerdaftar, "s", $nik);
 
-            // Eksekusi query
-            if (mysqli_stmt_execute($stmtUpdate) && mysqli_stmt_execute($stmtInsertTerdaftar)) {
+
+            // Eksekusi query setelah eksekusi statement update
+            if (mysqli_stmt_execute($stmtInsertTerdaftar) && mysqli_stmt_execute($stmtUpdate)) {
                 echo "<script>alert('Data berhasil dikonfirmasi dan dipindahkan');</script>";
             } else {
                 echo "<script>alert('Gagal memindahkan data ke warga_terdaftar');</script>";
             }
-
+    
             // Mengarahkan kembali ke data_pengajuan.php setelah konfirmasi selesai
             header("Location: data_pengajuan.php");
             exit;

@@ -201,7 +201,7 @@ $num_rows = mysqli_num_rows($result);
         <table border='1' id="accountTable">
             <tr>
                 <th>Username</th>
-                <th>Nomor HP</th>
+                <th>Nama Lengkap</th>
                 <th>Role</th>
                 <th style="width: 10%;" >Aksi</th>
             </tr>
@@ -210,7 +210,7 @@ $num_rows = mysqli_num_rows($result);
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
                 echo "<td>" . $row['username'] . "</td>";
-                echo "<td>" . $row['nomorhp'] . "</td>";
+                echo "<td>" . $row['namalengkap'] . "</td>";
                 echo "<td>" . $row['role'] . "</td>";
                 echo "<td><button class='button-hapus' onclick='confirmDelete(\"" . $row['username'] . "\")'>Hapus</button></td>";
                 echo "</tr>";
@@ -232,7 +232,7 @@ $num_rows = mysqli_num_rows($result);
             
             // Loop melalui semua baris dan sembunyikan yang tidak sesuai
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1]; // Ganti angka 1 dengan indeks kolom yang ingin Anda cari
+                td = tr[i].getElementsByTagName("td")[0]; // Ganti angka 1 dengan indeks kolom yang ingin Anda cari
                 if (td) {
                     txtValue = td.textContent || td.innerText;
                     if (txtValue.toUpperCase().indexOf(filter) > -1) {

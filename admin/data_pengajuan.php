@@ -289,6 +289,11 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
             ?>
         </table>
 
+        
+    </div>
+    <div>
+        <a href="javascript:void(0);" onclick="confirmDeleteAllFileTambahan()" class="button-hapus-semua">Hapus Semua File Tambahan di Database</a>
+
     </div>
 
     <script>
@@ -303,6 +308,13 @@ $numRowsSudahDiproses = mysqli_num_rows($resultSudahDiproses);
             var isConfirmed = confirm("Apakah Anda yakin ingin menghapus data pengajuan?");
             if (isConfirmed) {
                 window.location.href = "hapus_pengajuan.php?nik=" + nik;
+            }
+        }
+
+        function confirmDeleteAllFileTambahan() {
+            var isConfirmed = confirm("Apakah Anda yakin ingin menghapus semua file tambahan di database?");
+            if (isConfirmed) {
+                window.location.href = "hapus_semua_file_tambahan.php?hapus_semua_file_tambahan=1";
             }
         }
 

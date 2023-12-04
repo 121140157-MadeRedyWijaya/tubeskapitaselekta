@@ -1,14 +1,17 @@
 <?php
 // Definisikan fungsi isValidFile
-function isValidFile($file, $allowedTypes) {
+function isValidFile($file, $allowedTypes, $maxSize) {
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
 
     // Cek apakah file ada sebelum menggunakan finfo_file
     if (file_exists($file)) {
         $fileType = finfo_file($finfo, $file);
+        $fileSize = filesize($file);
+
         finfo_close($finfo);
 
-        return in_array($fileType, $allowedTypes);
+        // Pengecekan tipe file dan ukuran
+        return in_array($fileType, $allowedTypes) && $fileSize <= $maxSize;
     } else {
         finfo_close($finfo);
         echo "<script>alert('File tidak ditemukan atau tidak dapat diakses.');</script>";
@@ -22,12 +25,28 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Ambil nilai dari formulir
-    $nik = $_POST['nik'] ?? '';
-    $tanggal_lahir = $_POST['tanggal_lahir'] ?? '';
-    $nama = $_POST['nama'] ?? '';
-    $agama = $_POST['agama'] ?? '';
-    $jenis_kelamin = $_POST['jenis_kelamin'] ?? '';
-    $alamat = $_POST['alamat'] ?? '';
+    // $nik = $_POST['nik'] ?? '';
+    // $no_kk = $_POST['no_kk'] ?? '';
+    // $nama = $_POST['nama'] ?? '';
+    // $tempat_lahir = $_POST['tempat_lahir'] ?? '';
+    // $tanggal_lahir = $_POST['tanggal_lahir'] ?? '';
+    // $jenis_kelamin = $_POST['jenis_kelamin'] ?? '';
+    // $agama = $_POST['agama'] ?? '';
+    // $pendidikan_terakhir = $_POST['pendidikan_terakhir'] ?? '';
+    // $pekerjaan = $_POST['pekerjaan'] ??
+    // $golongan_darah = $_POST['golongan_darah'] ??
+    // $status_kawin = $_POST['status_kawin'] ??
+    // $hubungan = $_POST['hubungan'] ??
+    // $warga_negara = $_POST['warga_negara'] ??
+    // $sukuetnis = $_POST['sukuetnis'] ??
+    // $nik_ayah = $_POST['nik_ayah'] ??
+    // $nama_ayah = $_POST['nama_ayah'] ??
+    // $nik_ibu = $_POST['nik_ibu'] ??
+    // $nama_ibu = $_POST['nama_ibu'] ??
+    // $status_penduduk = $_POST['status_penduduk'] ??
+    // $no_telpon = $_POST['no_telpon'] ??
+    // $alamat = $_POST['alamat'] ?? '';
+    
     $username = $_SESSION['username'] ?? ''; // Mengambil username dari sesi pengguna yang sudah login
 
     // Tambahkan kolom tanggal_submit
@@ -44,44 +63,105 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!is_dir($target_dir)) {
         mkdir($target_dir, 0777, true);
     }
-
-    // KK
+    
     $kk_file = $target_dir . basename($_FILES["kk"]["name"]);
-    $allowedTypes = ['image/jpeg', 'image/png', 'application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-    if (isValidFile($_FILES["kk"]["tmp_name"], $allowedTypes)) {
+    if (!empty($_FILES["kk"]["name"])) {
         move_uploaded_file($_FILES["kk"]["tmp_name"], $kk_file);
-    } else {
-        echo "<script>alert('File KK tidak valid. Hanya file gambar (jpeg, jpg, png), PDF, atau DOCX yang diperbolehkan.');</script>";
-        exit;
     }
-
+    
     // KTP
     $ktp_file = $target_dir . basename($_FILES["ktp"]["name"]);
     if (!empty($_FILES["ktp"]["name"])) {
-        if (isValidFile($_FILES["ktp"]["tmp_name"], $allowedTypes)) {
-            move_uploaded_file($_FILES["ktp"]["tmp_name"], $ktp_file);
-        } else {
-            echo "<script>alert('File KTP tidak valid. Hanya file gambar (jpeg, jpg, png), PDF, atau DOCX yang diperbolehkan.');</script>";
-            exit;
-        }
+        move_uploaded_file($_FILES["ktp"]["tmp_name"], $ktp_file);
     }
 
-    // Simpan data ke database
-    $query = "INSERT INTO warga_pengajuan (nik, tanggal_lahir, nama, agama, jenis_kelamin, alamat, username, kk_filename, ktp_filename, tanggal_submit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $stmt = mysqli_prepare($koneksi, $query);
-    mysqli_stmt_bind_param($stmt, "ssssssssss", $nik, $tanggal_lahir, $nama, $agama, $jenis_kelamin, $alamat, $username, basename($kk_file), basename($ktp_file), $tanggal_submit_gmt7);
 
+    $query = "INSERT INTO warga_pengajuan (nik, no_kk, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pendidikan_terakhir, pekerjaan, golongan_darah, status_kawin, hubungan, warga_negara, sukuetnis, nik_ayah, nama_ayah, nik_ibu, nama_ibu, status_penduduk, no_telpon, alamat, username, kk_filename, ktp_filename, tanggal_submit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+
+        
+    // Prepare the query
+    $stmt = mysqli_prepare($koneksi, $query);
+
+    // Check if preparation was successful
+    if ($stmt === false) {
+        die("Error in preparing the statement: " . mysqli_error($koneksi));
+    }
+
+    // Bind parameter with the appropriate data type
+    // Bind parameter with the appropriate data type
+    mysqli_stmt_bind_param(
+        $stmt,
+        "sssssssssssssssssssssssss", // Replace with the actual data types of your parameters
+        $nik,
+        $no_kk,
+        $nama,
+        $tempat_lahir,
+        $tanggal_lahir,
+        $jenis_kelamin,
+        $agama,
+        $pendidikan_terakhir,
+        $pekerjaan,
+        $golongan_darah,
+        $status_kawin,
+        $hubungan,
+        $warga_negara,
+        $sukuetnis,
+        $nik_ayah,
+        $nama_ayah,
+        $nik_ibu,
+        $nama_ibu,
+        $status_penduduk,
+        $no_telpon,
+        $alamat,
+        $username,
+        basename($kk_file),
+        basename($ktp_file),
+        $tanggal_submit_gmt7
+
+    );
+
+// Assign values to the parameters
+$nik = $_POST['nik'];
+$no_kk = $_POST['no_kk'];
+$nama = $_POST['nama'];
+$tempat_lahir = $_POST['tempat_lahir'];
+$tanggal_lahir = $_POST['tanggal_lahir'];
+$jenis_kelamin = $_POST['jenis_kelamin'];
+$agama = $_POST['agama'];
+$pendidikan_terakhir = $_POST['pendidikan_terakhir'];
+$pekerjaan = $_POST['pekerjaan'];
+$golongan_darah = $_POST['golongan_darah'];
+$status_kawin = $_POST['status_kawin'];
+$hubungan = $_POST['hubungan'];
+$warga_negara = $_POST['warga_negara'];
+$sukuetnis = $_POST['sukuetnis'];
+$nik_ayah = $_POST['nik_ayah'];
+$nama_ayah = $_POST['nama_ayah'];
+$nik_ibu = $_POST['nik_ibu'];
+$nama_ibu = $_POST['nama_ibu'];
+$status_penduduk = $_POST['status_penduduk'];
+$no_telpon = $_POST['no_telpon'];
+$alamat = $_POST['alamat'];
+$username = $_SESSION['username'];
+
+    
+
+    // Execute the statement
     if (mysqli_stmt_execute($stmt)) {
         // Data berhasil disimpan ke database
         echo "<script>alert('Data berhasil dikirim dan disimpan');</script>";
         header('Location: application_table.php');
+
         exit;
     } else {
         // Gagal menyimpan data
-        echo "<script>alert('Gagal menyimpan data ke database');</script>";
+        die("Error in executing the statement: " . mysqli_error($koneksi));
     }
 
+    // Close the statement
     mysqli_stmt_close($stmt);
+    
 }
 ?>
 
@@ -219,6 +299,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-top: 20px;
         }
 
+        select {
+            width: 60%;
+            height: 34px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        /* Opsi untuk menambahkan warna latar belakang saat dihover */
+        select:hover {
+            background-color: #f8f8f8;
+        }
+
+        /* Opsi untuk menambahkan efek transisi ketika memilih opsi */
+        select:focus {
+            outline: none;
+            border-color: #66afe9;
+            box-shadow: 0 0 5px rgba(102, 175, 233, 0.6);
+        }
+
     </style>
 </head>
 <body>
@@ -245,22 +347,134 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="nik">NIK:</label>
                 <input type="text" id="nik" name="nik" required>
 
+                <label for="no_kk">KK:</label>
+                <input type="text" id="no_kk" name="no_kk" required>
+
+                <label for="nama">Nama Lengkap:</label>
+                <input type="text" id="nama" name="nama" required>
+
+                <label for="tempat_lahir">Tempat Lahir:</label>
+                <input type="text" id="tempat_lahir" name="tempat_lahir" required>
+
                 <label for="tanggal_lahir">Tanggal Lahir:</label>
                 <input type="date" id="tanggal_lahir" name="tanggal_lahir" required>
 
-                <label for="nama">Nama:</label>
-                <input type="text" id="nama" name="nama" required>
-            </div>
-
-            <!-- Kolom Kanan -->
-            <div class="form-group">
-                <label for="agama">Agama:</label>
-                <input type="text" id="agama" name="agama" required>
-
                 <label for="jenis_kelamin">Jenis Kelamin:</label>
-                <input type="text" id="jenis_kelamin" name="jenis_kelamin" required>
+                <select id="jenis_kelamin" name="jenis_kelamin" required>
+                    <option value="" style="display:none;" selected disabled>Pilih Jenis Kelamin</option>
+                    <option value="laki-laki">Laki-Laki</option>
+                    <option value="perempuan">Perempuan</option>
+                </select>
+                
+                <label for="agama">Agama:</label>
+                <select id="agama" name="agama" required>
+                    <option value="" style="display:none;" selected disabled>Pilih Agama</option>
+                    <option value="Islam">Islam</option>
+                    <option value="Kristen">Kristen</option>
+                    <option value="Katholik">Katholik</option>
+                    <option value="Hindu">Hindu</option>
+                    <option value="Budha">Budha</option>
+                    <option value="Khonghucu">Khonghucu</option>
+                    <option value="Kepercayaan Lain">Kepercayaan Lain</option>
+                </select>
+                
+                <label for="pendidikan_terakhir">Pendidikan Terakhir:</label>
+                <select id="pendidikan_terakhir" name="pendidikan_terakhir" required>
+                    <option value="" style="display:none;" selected disabled>Pilih Pendidikan</option>
+                    <option value="Tidak/Belum Sekolah">Tidak/Belum Sekolah</option>
+                    <option value="Belum Tamat SD/Sederajat">Belum Tamat SD/Sederajat</option>
+                    <option value="Tamat SD/Sederajat">Tamat SD/Sederajat</option>
+                    <option value="SLTP/Sederajat">SLTP/Sederajat</option>
+                    <option value="SLTA/Sederajat">SLTA/Sederajat</option>
+                    <option value="Diploma I/II">Diploma I/II</option>
+                    <option value="Akademi/Diploma III/S. Muda">Akademi/Diploma III/S. Muda</option>
+                    <option value="Diploma IV/Strata I">Diploma IV/Strata I</option>
+                    <option value="Strata II">Strata II</option>
+                    <option value="Strata III">Strata III</option>
+                </select>
+                
+                <label for="pekerjaan">Pekerjaan:</label>
+                <input type="text" id="pekerjaan" name="pekerjaan" required>
+                
+                <label for="golongan_darah">Golongan Darah:</label>
+                <select id="golongan_darah" name="golongan_darah" required>
+                    <option value="" style="display:none;" selected disabled>Pilih Golongan Darah</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="AB">AB</option>
+                    <option value="O">O</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="Tidak Tahu">Tidak Tahu</option>
+                </select>
+                
+                <label for="status_kawin">Status Kawin:</label>
+                <select id="status_kawin" name="status_kawin" required>
+                    <option value="" style="display:none;" selected disabled>Pilih Status Kawin</option>
+                    <option value="Belum Kawin">Belum Kawin</option>
+                    <option value="Kawin">Kawin</option>
+                    <option value="Cerai Hidup">Cerai Hidup</option>
+                    <option value="Cerai Mati">Cerai Mati</option>
+                </select>
 
-                <label for="alamat">Alamat:</label>
+                <label for="hubungan">Hubungan Dalam Keluarga:</label>
+                <select id="hubungan" name="hubungan" required>
+                    <option value="" style="display:none;" selected disabled>Pilih Hubungan Keluarga</option>
+                    <option value="Kepala Keluarga">Kepala Keluarga</option>
+                    <option value="Suami">Suami</option>
+                    <option value="Istri">Istri</option>
+                    <option value="Anak">Anak</option>
+                    <option value="Menantu">Menantu</option>
+                    <option value="Cucu">Cucu</option>
+                    <option value="Mertua">Mertua</option>
+                    <option value="Pembantu">Pembantu</option>
+                </select>
+                
+            </div>
+            
+            <!-- Kolom Tengah -->
+            <div class="form-group">
+                
+                <label for="warga_negara">Warga Negara:</label>
+                <select id="warga_negara" name="warga_negara" required>
+                    <option value="" style="display:none;" selected disabled>Pilih Warga Negara</option>
+                    <option value="WNI">WNI</option>
+                    <option value="WNA">WNA</option>
+                    <option value="Dua Kewarganegaraan">Dua Kewarganegaraan</option>
+                </select>
+                
+                <label for="sukuetnis">Suku/Etnis:</label>
+                <input type="text" id="sukuetnis" name="sukuetnis">
+                
+                <label for="nik_ayah">NIK Ayah:</label>
+                <input type="text" id="nik_ayah" name="nik_ayah">
+                
+                <label for="nama_ayah">Nama Ayah:</label>
+                <input type="text" id="nama_ayah" name="nama_ayah">
+                
+                <label for="nik_ibu">NIK Ibu:</label>
+                <input type="text" id="nik_ibu" name="nik_ibu">
+                
+                <label for="nama_ibu">Nama Ibu:</label>
+                <input type="text" id="nama_ibu" name="nama_ibu">
+                
+                <label for="status_penduduk">Status Penduduk:</label>
+                <select id="status_penduduk" name="status_penduduk" required>
+                    <option value="" style="display:none;" selected disabled>Pilih Status Penduduk</option>
+                    <option value="Tetap">Tetap</option>
+                    <option value="Tidak Tetap">Tidak Tetap</option>
+                </select>
+
+                <label for="no_telpon">Nomor Telepon:</label>
+                <input type="text" id="no_telepon" name="no_telpon">
+
+                <label for="alamat">Alamat Sekarang:</label>
                 <input type="text" id="alamat" name="alamat" required>
             </div>
 
@@ -289,10 +503,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         function confirmLogout() {
-                var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
-                if (confirmLogout) {
-                    window.location.href = "../logout.php";
-                }
+            var confirmLogout = confirm("Apakah Anda yakin ingin logout?");
+            if (confirmLogout) {
+                window.location.href = "../logout.php";
+            }
         }
     </script>
 

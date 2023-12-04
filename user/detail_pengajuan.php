@@ -1,23 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +13,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh; 
+            height: 150vh; 
             text-align: left; 
         }
 
@@ -111,11 +92,27 @@
             if ($row = mysqli_fetch_assoc($result)) {
                 echo "<h2>Detail Data Pengajuan</h2>";
                 echo "<p>NIK: " . $row['nik'] . "</p>";
+                echo "<p>No. KK: " . $row['no_kk'] . "</p>";
+                echo "<p>Nama Lengkap: " . $row['nama'] . "</p>";
+                echo "<p>Tempat Lahir: " . $row['tempat_lahir'] . "</p>";
                 echo "<p>Tanggal Lahir: " . $row['tanggal_lahir'] . "</p>";
-                echo "<p>Nama: " . $row['nama'] . "</p>";
-                echo "<p>Agama: " . $row['agama'] . "</p>";
                 echo "<p>Jenis Kelamin: " . $row['jenis_kelamin'] . "</p>";
-                echo "<p>Alamat: " . $row['alamat'] . "</p>";
+                echo "<p>Agama: " . $row['agama'] . "</p>";
+                echo "<p>Pendidikan Terakhir: " . $row['pendidikan_terakhir'] . "</p>";
+                echo "<p>Pekerjaan: " . $row['pekerjaan'] . "</p>";
+                echo "<p>Golongan Darah: " . $row['golongan_darah'] . "</p>";
+                echo "<p>Status Kawin: " . $row['status_kawin'] . "</p>";
+                echo "<p>Hubungan Dalam Keluarga: " . $row['hubungan'] . "</p>";
+                echo "<p>Warga Negara: " . $row['warga_negara'] . "</p>";
+                echo "<p>Suku/Etnis: " . $row['sukuetnis'] . "</p>";
+                echo "<p>NIK Ayah: " . $row['nik_ayah'] . "</p>";
+                echo "<p>Nama Ayah: " . $row['nama_ayah'] . "</p>";
+                echo "<p>NIK Ibu: " . $row['nik_ibu'] . "</p>";
+                echo "<p>Nama Ibu: " . $row['nama_ibu'] . "</p>";
+                echo "<p>Status Penduduk: " . $row['status_penduduk'] . "</p>";
+                echo "<p>Nomor Telepon: " . $row['no_telpon'] . "</p>";
+                echo "<p>Alamat Sekarang: " . $row['alamat'] . "</p>";
+
 
 
             } else {
