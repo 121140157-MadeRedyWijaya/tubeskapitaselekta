@@ -1,7 +1,6 @@
 <?php
-include 'koneksi.php';
-
 session_start();
+include 'koneksi.php';
 
 if (isset($_SESSION['username'])) {
     // Jika sudah login, arahkan ke dashboard sesuai peran
@@ -22,15 +21,15 @@ if ($_SERVER && isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] 
     $stmt = mysqli_prepare($koneksi, $query);
     mysqli_stmt_bind_param($stmt, "s", $input_username);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $username, $hashed_password, $role);
+    mysqli_stmt_bind_result($stmt, $username, $stored_password, $role);
 
     // Fetch result
     mysqli_stmt_fetch($stmt);
 
     mysqli_stmt_close($stmt);
 
-    // Verifikasi pengguna
-    if ($username && password_verify($input_password, $hashed_password)) {
+    // Verifikasi pengguna tanpa enkripsi password
+    if ($username && $input_password == $stored_password) {
         // Jika login berhasil, set session dan arahkan ke dashboard sesuai peran
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $role;

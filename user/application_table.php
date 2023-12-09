@@ -1,24 +1,17 @@
 <?php
-include __DIR__ . '/../koneksi.php';
 session_start();
-
+include __DIR__ . '/../koneksi.php';
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit;
 }
-
 // Mengambil data dari database
-
 $query = "SELECT * FROM warga_pengajuan WHERE username = ? ORDER BY tanggal_submit DESC";
 $stmt = mysqli_prepare($koneksi, $query);
 mysqli_stmt_bind_param($stmt, "s", $_SESSION['username']);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
-
-
-
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -162,7 +155,7 @@ $result = mysqli_stmt_get_result($stmt);
         .batal-link {
             flex: 1;
             margin-right: 5px;
-            max-width: 50px; 
+            max-width: 60px; 
         }
 
         .batal-link {

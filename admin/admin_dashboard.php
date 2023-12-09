@@ -197,6 +197,11 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
             .nav-link-right a:last-child img {
                 width: 25px; /* Sesuaikan dengan ukuran yang diinginkan */
             }
+            
+            .ganti-sandi {
+                margin-top: 20px;
+                text-align: center;
+            }
         }
 
 
@@ -251,6 +256,9 @@ $jumlahSudahDiproses = $dataSudahDiproses['sudah_diproses'];
         </div>
         
     </div>
+        <div class="ganti-sandi">
+            <a href="../change_password.php" class="nav-link-right">Ganti Kata Sandi</a>
+        </div>
 
     <script>
         function confirmLogout() {

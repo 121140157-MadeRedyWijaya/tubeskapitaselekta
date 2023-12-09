@@ -1,4 +1,6 @@
 <?php
+ob_start();
+session_start();
 include __DIR__ . '/../koneksi.php';
 
 if (isset($_GET['username'])) {

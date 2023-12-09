@@ -209,6 +209,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         
     </div>
+    <div class="ganti-sandi">
+            <a href="../change_password.php" class="nav-link-right">Ganti Kata Sandi</a>
+    </div>
 
     <script>
         function confirmLogout() {

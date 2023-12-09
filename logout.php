@@ -1,15 +1,9 @@
-
 <?php
-include 'koneksi.php';
+ob_start();
 session_start();
-
-// Hapus semua variabel sesi
 $_SESSION = array();
-
-// Hancurkan sesi
 session_destroy();
-
-// Redirect ke halaman login setelah logout
 header("Location: index.php");
+ob_end_flush();
 exit;
 ?>

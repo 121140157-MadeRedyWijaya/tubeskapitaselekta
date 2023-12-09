@@ -1,4 +1,6 @@
 <?php
+include __DIR__ . '/../koneksi.php';
+session_start();
 // Definisikan fungsi isValidFile
 function isValidFile($file, $allowedTypes, $maxSize) {
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -19,34 +21,9 @@ function isValidFile($file, $allowedTypes, $maxSize) {
     }
 }
 
-include __DIR__ . '/../koneksi.php';
-
-session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Ambil nilai dari formulir
-    // $nik = $_POST['nik'] ?? '';
-    // $no_kk = $_POST['no_kk'] ?? '';
-    // $nama = $_POST['nama'] ?? '';
-    // $tempat_lahir = $_POST['tempat_lahir'] ?? '';
-    // $tanggal_lahir = $_POST['tanggal_lahir'] ?? '';
-    // $jenis_kelamin = $_POST['jenis_kelamin'] ?? '';
-    // $agama = $_POST['agama'] ?? '';
-    // $pendidikan_terakhir = $_POST['pendidikan_terakhir'] ?? '';
-    // $pekerjaan = $_POST['pekerjaan'] ??
-    // $golongan_darah = $_POST['golongan_darah'] ??
-    // $status_kawin = $_POST['status_kawin'] ??
-    // $hubungan = $_POST['hubungan'] ??
-    // $warga_negara = $_POST['warga_negara'] ??
-    // $sukuetnis = $_POST['sukuetnis'] ??
-    // $nik_ayah = $_POST['nik_ayah'] ??
-    // $nama_ayah = $_POST['nama_ayah'] ??
-    // $nik_ibu = $_POST['nik_ibu'] ??
-    // $nama_ibu = $_POST['nama_ibu'] ??
-    // $status_penduduk = $_POST['status_penduduk'] ??
-    // $no_telpon = $_POST['no_telpon'] ??
-    // $alamat = $_POST['alamat'] ?? '';
-    
+
     $username = $_SESSION['username'] ?? ''; // Mengambil username dari sesi pengguna yang sudah login
 
     // Tambahkan kolom tanggal_submit
@@ -76,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    $query = "INSERT INTO warga_pengajuan (nik, no_kk, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pendidikan_terakhir, pekerjaan, golongan_darah, status_kawin, hubungan, warga_negara, sukuetnis, nik_ayah, nama_ayah, nik_ibu, nama_ibu, status_penduduk, no_telpon, alamat, username, kk_filename, ktp_filename, tanggal_submit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO warga_pengajuan (nik, no_kk, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pendidikan_terakhir, pekerjaan, golongan_darah, status_kawin, hubungan, warga_negara, sukuetnis, nama_ayah, nama_ibu, status_penduduk, no_telpon, rw, rt, alamat, username, kk_filename, ktp_filename, tanggal_submit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
         
@@ -89,10 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Bind parameter with the appropriate data type
-    // Bind parameter with the appropriate data type
+
     mysqli_stmt_bind_param(
         $stmt,
-        "sssssssssssssssssssssssss", // Replace with the actual data types of your parameters
+        "sssssssssssssssssssssssss", 
         $nik,
         $no_kk,
         $nama,
@@ -107,12 +84,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hubungan,
         $warga_negara,
         $sukuetnis,
-        $nik_ayah,
         $nama_ayah,
-        $nik_ibu,
         $nama_ibu,
         $status_penduduk,
         $no_telpon,
+        $rw,
+        $rt,
         $alamat,
         $username,
         basename($kk_file),
@@ -121,46 +98,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     );
 
-// Assign values to the parameters
-$nik = $_POST['nik'];
-$no_kk = $_POST['no_kk'];
-$nama = $_POST['nama'];
-$tempat_lahir = $_POST['tempat_lahir'];
-$tanggal_lahir = $_POST['tanggal_lahir'];
-$jenis_kelamin = $_POST['jenis_kelamin'];
-$agama = $_POST['agama'];
-$pendidikan_terakhir = $_POST['pendidikan_terakhir'];
-$pekerjaan = $_POST['pekerjaan'];
-$golongan_darah = $_POST['golongan_darah'];
-$status_kawin = $_POST['status_kawin'];
-$hubungan = $_POST['hubungan'];
-$warga_negara = $_POST['warga_negara'];
-$sukuetnis = $_POST['sukuetnis'];
-$nik_ayah = $_POST['nik_ayah'];
-$nama_ayah = $_POST['nama_ayah'];
-$nik_ibu = $_POST['nik_ibu'];
-$nama_ibu = $_POST['nama_ibu'];
-$status_penduduk = $_POST['status_penduduk'];
-$no_telpon = $_POST['no_telpon'];
-$alamat = $_POST['alamat'];
-$username = $_SESSION['username'];
+    // Assign values to the parameters
+    $nik = $_POST['nik'];
+    $no_kk = $_POST['no_kk'];
+    $nama = $_POST['nama'];
+    $tempat_lahir = $_POST['tempat_lahir'];
+    $tanggal_lahir = $_POST['tanggal_lahir'];
+    $jenis_kelamin = $_POST['jenis_kelamin'];
+    $agama = $_POST['agama'];
+    $pendidikan_terakhir = $_POST['pendidikan_terakhir'];
+    $pekerjaan = $_POST['pekerjaan'];
+    $golongan_darah = $_POST['golongan_darah'];
+    $status_kawin = $_POST['status_kawin'];
+    $hubungan = $_POST['hubungan'];
+    $warga_negara = $_POST['warga_negara'];
+    $sukuetnis = $_POST['sukuetnis'];
+    $nama_ayah = $_POST['nama_ayah'];
+    $nama_ibu = $_POST['nama_ibu'];
+    $status_penduduk = $_POST['status_penduduk'];
+    $no_telpon = $_POST['no_telpon'];
+    $rw = $_POST['rw'];
+    $rt = $_POST['rt'];
+    $alamat = $_POST['alamat'];
+    $username = $_SESSION['username'];
 
-    
-
-    // Execute the statement
+    // Jalankan pernyataan
     if (mysqli_stmt_execute($stmt)) {
         // Data berhasil disimpan ke database
-        echo "<script>alert('Data berhasil dikirim dan disimpan');</script>";
         header('Location: application_table.php');
-
         exit;
     } else {
         // Gagal menyimpan data
         die("Error in executing the statement: " . mysqli_error($koneksi));
     }
-
-    // Close the statement
+    
+    // Tutup pernyataan
     mysqli_stmt_close($stmt);
+    
+    // ... Kode sebelumnya ...
+    
+    // Tampilkan alert JavaScript dan pernyataan lainnya di sini
+    echo "<script>alert('Data berhasil dikirim dan disimpan');</script>";
+
     
 }
 ?>
@@ -423,6 +402,11 @@ $username = $_SESSION['username'];
                     <option value="Cerai Mati">Cerai Mati</option>
                 </select>
 
+                
+            </div>
+            
+            <!-- Kolom Tengah -->
+            <div class="form-group">
                 <label for="hubungan">Hubungan Dalam Keluarga:</label>
                 <select id="hubungan" name="hubungan" required>
                     <option value="" style="display:none;" selected disabled>Pilih Hubungan Keluarga</option>
@@ -436,11 +420,6 @@ $username = $_SESSION['username'];
                     <option value="Pembantu">Pembantu</option>
                 </select>
                 
-            </div>
-            
-            <!-- Kolom Tengah -->
-            <div class="form-group">
-                
                 <label for="warga_negara">Warga Negara:</label>
                 <select id="warga_negara" name="warga_negara" required>
                     <option value="" style="display:none;" selected disabled>Pilih Warga Negara</option>
@@ -449,17 +428,11 @@ $username = $_SESSION['username'];
                     <option value="Dua Kewarganegaraan">Dua Kewarganegaraan</option>
                 </select>
                 
-                <label for="sukuetnis">Suku/Etnis:</label>
+                <label for="sukuetnis">Suku/Etnis (opsional):</label>
                 <input type="text" id="sukuetnis" name="sukuetnis">
-                
-                <label for="nik_ayah">NIK Ayah:</label>
-                <input type="text" id="nik_ayah" name="nik_ayah">
                 
                 <label for="nama_ayah">Nama Ayah:</label>
                 <input type="text" id="nama_ayah" name="nama_ayah">
-                
-                <label for="nik_ibu">NIK Ibu:</label>
-                <input type="text" id="nik_ibu" name="nik_ibu">
                 
                 <label for="nama_ibu">Nama Ibu:</label>
                 <input type="text" id="nama_ibu" name="nama_ibu">
@@ -473,6 +446,48 @@ $username = $_SESSION['username'];
 
                 <label for="no_telpon">Nomor Telepon:</label>
                 <input type="text" id="no_telepon" name="no_telpon">
+                
+                <label for="rw">Dusun:</label>
+                <select id="rw" name="rw" required>
+                    <option value="" style="display:none;" selected disabled>Pilih Dusun</option>
+                    <option value="KALIASIN I">KALIASIN I</option>
+                    <option value="KALIASIN II">KALIASIN II</option>
+                    <option value="KALIASIN III">KALIASIN III</option>
+                    <option value="KALIASIN IV">KALIASIN IV</option>
+                    <option value="BANJARSARI I">BANJARSARI I</option>
+                    <option value="BANJARSARI II">BANJARSARI II</option>
+                    <option value="BANJARSARI III">BANJARSARI III</option>
+                </select>
+                
+                <label for="rt">RT:</label>
+                <select id="rt" name="rt" required>
+                    <option value="" style="display:none;" selected disabled>Pilih RT</option>
+                    <option value="RT 001">RT 001</option>
+                    <option value="RT 002">RT 002</option>
+                    <option value="RT 003">RT 003</option>
+                    <option value="RT 004">RT 004</option>
+                    <option value="RT 005">RT 005</option>
+                    <option value="RT 006">RT 006</option>
+                    <option value="RT 007">RT 007</option>
+                    <option value="RT 008">RT 008</option>
+                    <option value="RT 009">RT 009</option>
+                    <option value="RT 010">RT 010</option>
+                    <option value="RT 011">RT 011</option>
+                    <option value="RT 012">RT 012</option>
+                    <option value="RT 013">RT 013</option>
+                    <option value="RT 014">RT 014</option>
+                    <option value="RT 015">RT 015</option>
+                    <option value="RT 016">RT 016</option>
+                    <option value="RT 017">RT 017</option>
+                    <option value="RT 018">RT 018</option>
+                    <option value="RT 019">RT 019</option>
+                    <option value="RT 020">RT 020</option>
+                    <option value="RT 021">RT 021</option>
+                    <option value="RT 022">RT 022</option>
+                    <option value="RT 023">RT 023</option>
+                    <option value="RT 024">RT 024</option>
+                    <option value="RT 025">RT 025</option>
+                </select>
 
                 <label for="alamat">Alamat Sekarang:</label>
                 <input type="text" id="alamat" name="alamat" required>

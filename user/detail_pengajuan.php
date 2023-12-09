@@ -1,4 +1,7 @@
-
+<?php
+ob_start();
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +16,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 150vh; 
+            height: 160vh; 
             text-align: left; 
         }
 
@@ -70,8 +73,6 @@
     <div class="container">
     <?php
         include __DIR__ . '/../koneksi.php';
-        session_start();
-
         if (!isset($_SESSION['username'])) {
             header("Location: login.php");
             exit;
@@ -105,12 +106,12 @@
                 echo "<p>Hubungan Dalam Keluarga: " . $row['hubungan'] . "</p>";
                 echo "<p>Warga Negara: " . $row['warga_negara'] . "</p>";
                 echo "<p>Suku/Etnis: " . $row['sukuetnis'] . "</p>";
-                echo "<p>NIK Ayah: " . $row['nik_ayah'] . "</p>";
                 echo "<p>Nama Ayah: " . $row['nama_ayah'] . "</p>";
-                echo "<p>NIK Ibu: " . $row['nik_ibu'] . "</p>";
                 echo "<p>Nama Ibu: " . $row['nama_ibu'] . "</p>";
                 echo "<p>Status Penduduk: " . $row['status_penduduk'] . "</p>";
                 echo "<p>Nomor Telepon: " . $row['no_telpon'] . "</p>";
+                echo "<p>Dusun: " . $row['rw'] . "</p>";
+                echo "<p>RT: " . $row['rt'] . "</p>";
                 echo "<p>Alamat Sekarang: " . $row['alamat'] . "</p>";
 
 
@@ -127,10 +128,7 @@
             echo "<p>Invalid request. Please provide a valid ID.</p>";
         }
         ?>
-
-       
         <a href="application_table.php" style="display: block; text-align: center;">Kembali</a>
-
     </div>
 </body>
 </html>

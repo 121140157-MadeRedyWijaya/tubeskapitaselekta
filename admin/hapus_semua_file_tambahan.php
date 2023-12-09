@@ -1,8 +1,7 @@
 <?php
-// Sisipkan koneksi.php jika diperlukan
-include __DIR__ . '/../koneksi.php';
-
+ob_start();
 session_start();
+include __DIR__ . '/../koneksi.php';
 
 // Periksa apakah admin sudah login
 if (!isset($_SESSION['username'])) {

@@ -14,7 +14,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 180vh; 
+            height: 170vh; 
             text-align: left; 
         }
 
@@ -93,12 +93,12 @@
             echo "<p><strong>Hubungan Dalam Keluarga: " . $row['hubungan'] . "</p>";
             echo "<p><strong>Warga Negara: " . $row['warga_negara'] . "</p>";
             echo "<p><strong>Suku/Etnis: " . $row['sukuetnis'] . "</p>";
-            echo "<p><strong>NIK Ayah: " . $row['nik_ayah'] . "</p>";
             echo "<p><strong>Nama Ayah: " . $row['nama_ayah'] . "</p>";
-            echo "<p><strong>NIK Ibu: " . $row['nik_ibu'] . "</p>";
             echo "<p><strong>Nama Ibu: " . $row['nama_ibu'] . "</p>";
             echo "<p><strong>Status Penduduk: " . $row['status_penduduk'] . "</p>";
             echo "<p><strong>Nomor Telepon: " . $row['no_telpon'] . "</p>";
+            echo "<p><strong>Dusun: " . $row['rw'] . "</p>";
+            echo "<p><strong>RT: " . $row['rt'] . "</p>";
             echo "<p><strong>Alamat Sekarang: " . $row['alamat'] . "</p>";
 
             // Menampilkan link ke file KK dan KTP jika tersedia

@@ -1,4 +1,6 @@
 <?php
+ob_start();
+session_start();
 include 'koneksi.php';
 ?>
 
@@ -160,7 +162,6 @@ include 'koneksi.php';
 
 <!-- Logika Penyimpanan Data Registrasi -->
 <?php
-include 'koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
@@ -182,11 +183,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Username sudah digunakan. Silakan pilih username lain.";
     } else {
         // Jika username belum ada, lanjutkan proses registrasi
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
         $query = "INSERT INTO users (username, namalengkap, password, role) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($koneksi, $query);
-        mysqli_stmt_bind_param($stmt, "ssss", $username, $namalengkap, $hashedPassword, $role);
+        mysqli_stmt_bind_param($stmt, "ssss", $username, $namalengkap, $password, $role);
 
         if (mysqli_stmt_execute($stmt)) {
             echo "<script>alert('Pendaftaran Akun Berhasil');</script>";

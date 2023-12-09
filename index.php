@@ -105,7 +105,6 @@
     <!-- Footer -->
     <footer>
         <a href="https://kalisarinatar.id/">Tentang Desa</a>
-        <a href="#">Butuh Bantuan</a>
     </footer>
 </body>
 </html>

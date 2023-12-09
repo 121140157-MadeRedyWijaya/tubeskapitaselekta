@@ -1,4 +1,7 @@
-
+<?php
+ob_start();
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,12 +103,12 @@
                 echo "<p><strong>Hubungan Dalam Keluarga: " . $row['hubungan'] . "</p>";
                 echo "<p><strong>Warga Negara: " . $row['warga_negara'] . "</p>";
                 echo "<p><strong>Suku/Etnis: " . $row['sukuetnis'] . "</p>";
-                echo "<p><strong>NIK Ayah: " . $row['nik_ayah'] . "</p>";
                 echo "<p><strong>Nama Ayah: " . $row['nama_ayah'] . "</p>";
-                echo "<p><strong>NIK Ibu: " . $row['nik_ibu'] . "</p>";
                 echo "<p><strong>Nama Ibu: " . $row['nama_ibu'] . "</p>";
                 echo "<p><strong>Status Penduduk: " . $row['status_penduduk'] . "</p>";
                 echo "<p><strong>Nomor Telepon: " . $row['no_telpon'] . "</p>";
+                echo "<p><strong>Dusun: " . $row['rw'] . "</p>";
+                echo "<p><strong>RT: " . $row['rt'] . "</p>";
                 echo "<p><strong>Alamat Sekarang: " . $row['alamat'] . "</p>";
 
                 // Menampilkan link ke file KK dan KTP jika tersedia
@@ -125,12 +128,11 @@
             $queryUpdate = "UPDATE warga_pengajuan SET diproses = 1 WHERE nik = ?";
             $stmtUpdate = mysqli_prepare($koneksi, $queryUpdate);
             mysqli_stmt_bind_param($stmtUpdate, "s", $nik);
-
             
 
             // Query untuk menambahkan duplikat data ke warga_terdaftar
-            $queryInsertTerdaftar = "INSERT INTO warga_terdaftar (nik, no_kk, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pendidikan_terakhir, pekerjaan, golongan_darah, status_kawin, hubungan, warga_negara, sukuetnis, nik_ayah, nama_ayah, nik_ibu, nama_ibu, status_penduduk, no_telpon, alamat, username) 
-                                    SELECT nik, no_kk, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pendidikan_terakhir, pekerjaan, golongan_darah, status_kawin, hubungan, warga_negara, sukuetnis, nik_ayah, nama_ayah, nik_ibu, nama_ibu, status_penduduk, no_telpon, alamat, username
+            $queryInsertTerdaftar = "INSERT INTO warga_terdaftar (nik, no_kk, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pendidikan_terakhir, pekerjaan, golongan_darah, status_kawin, hubungan, warga_negara, sukuetnis, nama_ayah, nama_ibu, status_penduduk, no_telpon, rw, rt, alamat, username) 
+                                    SELECT nik, no_kk, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pendidikan_terakhir, pekerjaan, golongan_darah, status_kawin, hubungan, warga_negara, sukuetnis, nama_ayah, nama_ibu, status_penduduk, no_telpon, rw, rt, alamat, username
                                     FROM warga_pengajuan WHERE nik = ?";
             $stmtInsertTerdaftar = mysqli_prepare($koneksi, $queryInsertTerdaftar);
             mysqli_stmt_bind_param($stmtInsertTerdaftar, "s", $nik);
@@ -148,7 +150,6 @@
             exit;
         }
         ?>
-
         <form method="post" action="detail.php?nik=<?php echo $nik; ?>" onsubmit="return confirmSubmission()">
             <input type="submit" name="konfirmasi" value="Terima Data Warga">
         </form>

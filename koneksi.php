@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$username = "root";
-$password = "";
-$database = "kalisari";
+$username = "pendata2_admin";
+$password = "Kalisari_1234";
+$database = "pendata2_kalisari";
 
 $koneksi = mysqli_connect($host, $username, $password, $database);
 

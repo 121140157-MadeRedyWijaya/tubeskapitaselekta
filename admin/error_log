@@ -1,0 +1,5 @@
+[05-Dec-2023 16:59:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/pendata2/public_html/admin/detail.php:1) in /home/pendata2/public_html/admin/detail.php on line 147
+[05-Dec-2023 16:59:59 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/pendata2/public_html/admin/hapus_pengajuan.php:13) in /home/pendata2/public_html/admin/hapus_pengajuan.php on line 22
+[05-Dec-2023 17:01:10 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/pendata2/public_html/admin/hapus_warga.php:13) in /home/pendata2/public_html/admin/hapus_warga.php on line 22
+[05-Dec-2023 23:37:27 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/pendata2/public_html/admin/detail.php:1) in /home/pendata2/public_html/admin/detail.php on line 147
+[05-Dec-2023 23:44:55 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/pendata2/public_html/admin/hapus_pengajuan.php:13) in /home/pendata2/public_html/admin/hapus_pengajuan.php on line 22
